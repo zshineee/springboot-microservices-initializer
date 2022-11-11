@@ -1,0 +1,1 @@
+1. `maven compile` 编译 `proto` 文件生成源代码
