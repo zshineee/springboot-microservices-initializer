@@ -1,2 +1,16 @@
 server:
   port: 8081
+  servlet:
+    context-path: /${spring.application.name}
+spring:
+  application:
+    name: server1
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+      discovery:
+        service-name: ${spring.application.name}
+        instance-id: ${spring.application.name}:${random.value}
+        healthCheckPath: /${spring.application.name}/health
+        healthCheckInterval: 15s
