@@ -1,0 +1,22 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /${spring.application.name}
+spring:
+  application:
+    name: producer
+  rabbitmq:
+    addresses: localhost:5672
+    username: root
+    password: 123456
+  cloud:
+    stream:
+      bindings:
+        error-in-0:
+          destination: error-topic
+        error-out-0:
+          destination: error-topic
+        debug-in-0:
+          destination: debug-topic
+        debug-out-0:
+          destination: debug-topic
