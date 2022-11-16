@@ -14,6 +14,7 @@
     <modules>
         <module>demo-gateway-base</module>
         <module>demo-gateway-consul</module>
+        <module>demo-gateway-dynamic</module>
     </modules>
 
     <properties>
