@@ -5,6 +5,10 @@ spring:
     base-path: /${spring.application.name}
   application:
     name: gateway
+  rabbitmq:
+    addresses: localhost:5672
+    username: root
+    password: 123456
   cloud:
     consul:
       host: localhost
@@ -14,3 +18,11 @@ spring:
         instance-id: ${spring.application.name}:${random.value}
         healthCheckPath: /${spring.application.name}/health
         healthCheckInterval: 15s
+    function:
+      definition: route
+    stream:
+      bindings:
+        route-in-0:
+          destination: route-topic
+        route-out-0:
+          destination: route-topic

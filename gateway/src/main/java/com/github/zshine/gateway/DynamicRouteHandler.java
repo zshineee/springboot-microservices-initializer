@@ -37,11 +37,11 @@ public class DynamicRouteHandler implements RouteDefinitionRepository, Applicati
             routeDefinitions = objectMapper.readValue(str, new TypeReference<>() {
             });
         } catch (JsonProcessingException e) {
-            log.error("dynamic build routes parse error: {}", e.getMessage());
+            log.error("解析网关数据异常: {}", e.getMessage());
         }
 
         if (routeDefinitions.isEmpty()) {
-            log.error("dynamic build routes error:{}", "routes is empty");
+            log.error("动态网关数据为空");
         } else {
             //通知刷新网关
             applicationEventPublisher.publishEvent(new RefreshRoutesEvent(this));
