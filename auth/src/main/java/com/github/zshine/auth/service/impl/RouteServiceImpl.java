@@ -1,6 +1,6 @@
 package com.github.zshine.auth.service.impl;
 
-import com.github.zshine.auth.service.AuthService;
+import com.github.zshine.auth.service.RouteService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.stream.function.StreamBridge;
 import org.springframework.stereotype.Service;
@@ -10,7 +10,7 @@ import java.util.List;
 
 @Service
 @Slf4j
-public class AuthServiceImpl implements AuthService {
+public class RouteServiceImpl implements RouteService {
 
     @Resource
     private StreamBridge streamBridge;

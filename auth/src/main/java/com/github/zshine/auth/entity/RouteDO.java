@@ -10,7 +10,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Data
-public class AuthDO {
+public class RouteDO {
 
     private String id;
 
@@ -42,8 +42,8 @@ public class AuthDO {
     }
 
 
-    public static AuthBuilder builder() {
-        return new AuthBuilder();
+    public static RouteBuilder builder() {
+        return new RouteBuilder();
     }
 
 
@@ -63,50 +63,50 @@ public class AuthDO {
     }
 
 
-    public static class AuthBuilder {
+    public static class RouteBuilder {
 
         private final Map<String, Map<String, String>> predicateMap = new LinkedHashMap<>();
 
         private final Map<String, Map<String, String>> filterMap = new LinkedHashMap<>();
 
-        private final AuthDO authDO;
+        private final RouteDO routeDO;
 
-        private AuthBuilder() {
-            authDO = new AuthDO();
+        private RouteBuilder() {
+            routeDO = new RouteDO();
         }
 
-        public AuthDO build() {
-            authDO.setId(UUID.randomUUID().toString());
-            authDO.setPredicates(predicateMap.entrySet().stream()
-                    .map(stringMapEntry -> AuthDO.getPredicateDefinitionInstance(stringMapEntry.getKey(),stringMapEntry.getValue()))
+        public RouteDO build() {
+            routeDO.setId(UUID.randomUUID().toString());
+            routeDO.setPredicates(predicateMap.entrySet().stream()
+                    .map(stringMapEntry -> RouteDO.getPredicateDefinitionInstance(stringMapEntry.getKey(),stringMapEntry.getValue()))
                     .collect(Collectors.toList()));
-            authDO.setFilters(filterMap.entrySet().stream()
-                    .map(stringMapEntry -> AuthDO.getFilterDefinitionInstance(stringMapEntry.getKey(),stringMapEntry.getValue()))
+            routeDO.setFilters(filterMap.entrySet().stream()
+                    .map(stringMapEntry -> RouteDO.getFilterDefinitionInstance(stringMapEntry.getKey(),stringMapEntry.getValue()))
                     .collect(Collectors.toList()));
-            return authDO;
+            return routeDO;
         }
 
-        public AuthBuilder url(String url) {
-            authDO.setUri(URI.create(url));
+        public RouteBuilder url(String url) {
+            routeDO.setUri(URI.create(url));
             return this;
         }
 
-        public AuthBuilder predicate(String name, String key, String value) {
+        public RouteBuilder predicate(String name, String key, String value) {
             Map<String, String> map = predicateMap.getOrDefault(name, new LinkedHashMap<>(1));
             map.put(key, value);
             predicateMap.put(name, map);
             return this;
         }
 
-        public AuthBuilder filter(String name, String key, String value) {
+        public RouteBuilder filter(String name, String key, String value) {
             Map<String, String> map = filterMap.getOrDefault(name, new LinkedHashMap<>(1));
             map.put(key, value);
             filterMap.put(name, map);
             return this;
         }
 
-        public AuthBuilder order(Integer order) {
-            authDO.setOrder(order);
+        public RouteBuilder order(Integer order) {
+            routeDO.setOrder(order);
             return this;
         }
     }
