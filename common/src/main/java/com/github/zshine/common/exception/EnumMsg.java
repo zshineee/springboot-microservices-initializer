@@ -6,9 +6,9 @@ public interface EnumMsg {
     /**
      * 枚举的值
      *
-     * @return int
+     * @return String
      */
-    Integer getCode();
+    String getCode();
 
     /**
      * 枚举的描述

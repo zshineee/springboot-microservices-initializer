@@ -116,7 +116,7 @@ class CustomValidatorConstraint implements ConstraintValidator<CustomValidator, 
                 Method method = enumClass[0].getMethod("values");
                 EnumMsg[] inter = (EnumMsg[]) method.invoke(null, (Object[]) null);
                 for (EnumMsg enumMessage : inter) {
-                    types.add(String.valueOf(enumMessage.getCode()));
+                    types.add(enumMessage.getCode());
                 }
             } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
                 log.error("校验枚举异常:" + e.getMessage());
