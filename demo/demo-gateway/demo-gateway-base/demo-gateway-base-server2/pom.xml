@@ -25,7 +25,7 @@
     </dependencies>
 
     <build>
-        <finalName>server2</finalName>
+        <finalName>server2-base</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

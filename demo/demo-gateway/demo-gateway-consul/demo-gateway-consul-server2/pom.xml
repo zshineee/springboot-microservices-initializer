@@ -33,7 +33,7 @@
     </dependencies>
 
     <build>
-        <finalName>server2</finalName>
+        <finalName>server2-consul</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
