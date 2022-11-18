@@ -1,8 +1,9 @@
 server:
   port: 8080
 spring:
-  webflux:
-    base-path: /${spring.application.name}
+# google: StripPrefix filter is not able to remove a contextPath if there is any set
+#  webflux:
+#    base-path: /${spring.application.name}
   application:
     name: gateway
   rabbitmq:
@@ -16,7 +17,8 @@ spring:
       discovery:
         service-name: ${spring.application.name}
         instance-id: ${spring.application.name}:${random.value}
-        healthCheckPath: /${spring.application.name}/health
+        healthCheckPath: /health
+#        healthCheckPath: /${spring.application.name}/health
         healthCheckInterval: 15s
     function:
       definition: route
