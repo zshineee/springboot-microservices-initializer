@@ -31,19 +31,26 @@ public class DynamicRouteHandler implements RouteDefinitionRepository, Applicati
     /**
      * 构建网关
      */
-    public void buildRoutes(String str) {
+    public void buildRoutes(List<String> routes) {
+
         ObjectMapper objectMapper = new ObjectMapper();
+        List<RouteDefinition> temps = new ArrayList<>();
         try {
-            routeDefinitions = objectMapper.readValue(str, new TypeReference<>() {
-            });
+            for (String route : routes) {
+                RouteDefinition routeDefinition = objectMapper.readValue(route, new TypeReference<>() {
+                });
+                temps.add(routeDefinition);
+            }
         } catch (JsonProcessingException e) {
             log.error("解析网关数据异常: {}", e.getMessage());
+            temps = new ArrayList<>();
         }
 
-        if (routeDefinitions.isEmpty()) {
+        if (temps.isEmpty()) {
             log.error("动态网关数据为空");
         } else {
             //通知刷新网关
+            routeDefinitions = temps;
             applicationEventPublisher.publishEvent(new RefreshRoutesEvent(this));
         }
     }

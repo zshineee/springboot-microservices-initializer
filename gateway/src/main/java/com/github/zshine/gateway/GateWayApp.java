@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
 
 import javax.annotation.Resource;
+import java.util.List;
 import java.util.function.Consumer;
 
 @SpringBootApplication
@@ -33,7 +34,7 @@ public class GateWayApp {
 
 
     @Bean
-    public Consumer<String> route() {
+    public Consumer<List<String>> route() {
         return route -> {
             log.info("广播网关消息：{}", route);
             dynamicRouteHandler.buildRoutes(route);
