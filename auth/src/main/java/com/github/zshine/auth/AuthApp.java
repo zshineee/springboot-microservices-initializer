@@ -6,10 +6,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+import springfox.documentation.oas.annotations.EnableOpenApi;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackageClasses = {com.github.zshine.common.exception.GlobalExceptionHandler.class})
 @EnableDiscoveryClient
 @RestController
+@EnableOpenApi
 public class AuthApp {
 
     public static void main(String[] args) {
