@@ -23,9 +23,10 @@ import javax.validation.Valid;
 import java.util.stream.Collectors;
 
 
-@Api("路由管理")
+@Api(tags = "路由管理")
 @RestController
-@RequestMapping("route")
+@CrossOrigin(origins = "*", maxAge = 3600)
+@RequestMapping(value = "/route")
 @Validated
 public class RouteController {
 
