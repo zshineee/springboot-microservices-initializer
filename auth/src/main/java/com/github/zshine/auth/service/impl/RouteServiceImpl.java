@@ -3,6 +3,8 @@ package com.github.zshine.auth.service.impl;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.github.zshine.auth.constant.Constants;
 import com.github.zshine.auth.constant.enums.StatusEnum;
 import com.github.zshine.auth.dao.RouteDao;
@@ -70,7 +72,15 @@ public class RouteServiceImpl implements RouteService {
         for (Route route : routeDao.list(Wrappers.<Route>lambdaQuery()
                 .eq(Route::getStatus, StatusEnum.EFFECT))) {
             try {
-                routes.add(objectMapper.writeValueAsString(route));
+                ObjectNode objectNode = objectMapper.createObjectNode();
+                objectNode.put("id", route.getId())
+                        .put("uri", route.getUri())
+                        .put("order", route.getOrders());
+                objectNode.set("predicates", objectMapper.readValue(route.getPredicates(), objectMapper.getTypeFactory()
+                        .constructType(ArrayNode.class)));
+                objectNode.set("filters", objectMapper.readValue(route.getFilters(), objectMapper.getTypeFactory()
+                        .constructType(ArrayNode.class)));
+                routes.add(objectNode.toString());
             } catch (JsonProcessingException e) {
                 log.error("序列化网关: {}", e.getMessage());
                 routes = new ArrayList<>();
