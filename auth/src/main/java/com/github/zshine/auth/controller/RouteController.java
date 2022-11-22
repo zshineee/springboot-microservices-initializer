@@ -1,5 +1,6 @@
 package com.github.zshine.auth.controller;
 
+import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.github.zshine.auth.constant.enums.StatusEnum;
@@ -43,7 +44,7 @@ public class RouteController {
                                      @ApiParam("查询条数") @RequestParam() @CustomValidator(pattern = PatternEnum.NATURE, name = "查询条数") Integer limit,
                                      @ApiParam("状态") @RequestParam(required = false) @CustomValidator(enumClass = StatusEnum.class, name = "状态") Integer status) {
         Page<Route> pageData = routeDao.page(new Page<>(page, limit), Wrappers.<Route>lambdaQuery()
-                .eq(Route::getStatus, status));
+                .eq(!ObjectUtils.isEmpty(status), Route::getStatus, status));
         return PageJsonRsp.ok(pageData.getRecords()
                 .stream()
                 .map(Route::convert)

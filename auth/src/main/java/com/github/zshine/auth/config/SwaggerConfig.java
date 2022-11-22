@@ -21,7 +21,7 @@ public class SwaggerConfig {
                         .version("1.0.0")
                         .build())
                 .select()
-                .apis(RequestHandlerSelectors.any())
+                .apis(RequestHandlerSelectors.basePackage("com.github.zshine.auth.controller"))
                 .paths(PathSelectors.any())
                 .build();
     }
