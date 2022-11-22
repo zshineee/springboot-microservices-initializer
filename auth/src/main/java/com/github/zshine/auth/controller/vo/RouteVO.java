@@ -11,13 +11,13 @@ public class RouteVO extends RouteDTO {
 
 
 
-    public static RouteVO getInstance(String id, String predicates, String filters, String uri, Integer order, String description, StatusEnum statusEnum) {
+    public static RouteVO getInstance(String id, String predicates, String filters, String uri, Integer orders, String description, StatusEnum statusEnum) {
         RouteVO routeVO = new RouteVO();
         routeVO.setId(id);
         routeVO.setPredicates(predicates);
         routeVO.setFilters(filters);
         routeVO.setUri(uri);
-        routeVO.setOrder(order);
+        routeVO.setOrders(orders);
         routeVO.setDescription(description);
         routeVO.setStatus(Integer.valueOf(statusEnum.getCode()));
         return routeVO;

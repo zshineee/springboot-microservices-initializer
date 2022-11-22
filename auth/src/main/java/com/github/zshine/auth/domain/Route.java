@@ -25,28 +25,28 @@ public class Route {
     private String uri;
 
     @ApiModelProperty(notes = "优先级")
-    private Integer order;
+    private Integer orders;
 
     @ApiModelProperty(notes = "说明")
     private String description;
 
     @ApiModelProperty(notes = "状态")
-    private StatusEnum statusEnum;
+    private StatusEnum status;
 
 
-    public static Route getInstance(String id, String predicates, String filters, String uri, Integer order, String description, StatusEnum statusEnum) {
+    public static Route getInstance(String id, String predicates, String filters, String uri, Integer orders, String description, StatusEnum statusEnum) {
         Route route = new Route();
         route.setId(id);
         route.setPredicates(predicates);
         route.setFilters(filters);
         route.setUri(uri);
-        route.setOrder(order);
+        route.setOrders(orders);
         route.setDescription(description);
-        route.setStatusEnum(statusEnum);
+        route.setStatus(statusEnum);
         return route;
     }
 
     public RouteVO convert() {
-        return RouteVO.getInstance(id, predicates, filters, uri, order, description, statusEnum);
+        return RouteVO.getInstance(id, predicates, filters, uri, orders, description, status);
     }
 }

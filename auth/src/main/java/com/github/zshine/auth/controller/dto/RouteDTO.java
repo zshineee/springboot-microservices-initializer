@@ -29,7 +29,7 @@ public class RouteDTO {
 
     @ApiModelProperty(notes = "优先级")
     @CustomValidator(name = "优先级", pattern = PatternEnum.ID_NUM)
-    private Integer order;
+    private Integer orders;
 
     @ApiModelProperty(notes = "说明")
     @CustomValidator(name = "说明", max = 512)
@@ -40,7 +40,7 @@ public class RouteDTO {
     private Integer status;
 
     public Route convert() {
-        return Route.getInstance(id, predicates, filters, uri, order, description, StatusEnum.getInstance(status));
+        return Route.getInstance(id, predicates, filters, uri, orders, description, StatusEnum.getInstance(status));
     }
 
 

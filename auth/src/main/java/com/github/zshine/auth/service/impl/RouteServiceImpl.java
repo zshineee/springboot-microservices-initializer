@@ -31,7 +31,7 @@ public class RouteServiceImpl implements RouteService {
     @Override
     public void updateStatus(String id, StatusEnum statusEnum) {
         Route route = this.getAndCheckNullById(id);
-        route.setStatusEnum(statusEnum);
+        route.setStatus(statusEnum);
         routeDao.updateById(route);
         this.refresh();
     }
@@ -68,7 +68,7 @@ public class RouteServiceImpl implements RouteService {
         List<String> routes = new ArrayList<>();
 
         for (Route route : routeDao.list(Wrappers.<Route>lambdaQuery()
-                .eq(Route::getStatusEnum, StatusEnum.EFFECT))) {
+                .eq(Route::getStatus, StatusEnum.EFFECT))) {
             try {
                 routes.add(objectMapper.writeValueAsString(route));
             } catch (JsonProcessingException e) {
