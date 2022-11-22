@@ -14,7 +14,6 @@ public class SwaggerConfig {
     @Bean
     public Docket createRestApi() {
         return new Docket(DocumentationType.OAS_30)
-                .pathMapping("/")
                 .enable(true)
                 .apiInfo(new ApiInfoBuilder()
                         .title("权限")

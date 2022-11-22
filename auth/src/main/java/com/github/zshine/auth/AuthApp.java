@@ -1,6 +1,7 @@
 package com.github.zshine.auth;
 
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.actuate.autoconfigure.endpoint.web.CorsEndpointProperties;
 import org.springframework.boot.actuate.autoconfigure.endpoint.web.WebEndpointProperties;
@@ -23,10 +24,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-@SpringBootApplication(scanBasePackageClasses = {com.github.zshine.common.exception.GlobalExceptionHandler.class,
-        com.github.zshine.auth.config.SwaggerConfig.class})
+@SpringBootApplication(scanBasePackages = {"com.github.zshine.auth","com.github.zshine.common"})
 @EnableDiscoveryClient
 @RestController
+@MapperScan(basePackages = {"com.github.zshine.auth.mapper"})
 @EnableOpenApi
 public class AuthApp {
 
