@@ -19,6 +19,8 @@ class CustomValidatorConstraint implements ConstraintValidator<CustomValidator, 
 
     Object name;
 
+    boolean notnull;
+
     int max;
 
     int min;
@@ -34,6 +36,7 @@ class CustomValidatorConstraint implements ConstraintValidator<CustomValidator, 
         max = constraintAnnotation.max();
         min = constraintAnnotation.min();
         patternEnum = constraintAnnotation.pattern();
+        notnull = constraintAnnotation.notnull();
         ConstraintValidator.super.initialize(constraintAnnotation);
     }
 
@@ -45,6 +48,16 @@ class CustomValidatorConstraint implements ConstraintValidator<CustomValidator, 
 
         List<String> errMsg = new ArrayList<>();
         try {
+
+            //是否为空
+            if (notnull && ObjectUtils.isEmpty(value)) {
+                customMessageForValidation(context, name + "不能为空");
+                return false;
+            }
+
+            if (!notnull && ObjectUtils.isEmpty(value)) {
+                return true;
+            }
 
             if (arrayList.equals(value.getClass().getName())) {
                 List<Object> list = (List<Object>) value;

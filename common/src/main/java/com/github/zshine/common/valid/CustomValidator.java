@@ -20,6 +20,8 @@ public @interface CustomValidator {
 
     String name();
 
+    boolean notnull() default false;
+
     /**
      * 字段最小长度
      */
