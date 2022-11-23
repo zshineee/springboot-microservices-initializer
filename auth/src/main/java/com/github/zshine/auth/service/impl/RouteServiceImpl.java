@@ -60,11 +60,8 @@ public class RouteServiceImpl implements RouteService {
     }
 
 
-    /**
-     * 刷新网关
-     */
-    private void refresh() {
-        log.info("刷新网关数据");
+    @Override
+    public List<String> listRoutesString() {
         ObjectMapper objectMapper = new ObjectMapper();
 
         List<String> routes = new ArrayList<>();
@@ -86,6 +83,17 @@ public class RouteServiceImpl implements RouteService {
                 routes = new ArrayList<>();
             }
         }
+        return routes;
+    }
+
+    /**
+     * 刷新网关
+     */
+    private void refresh() {
+        log.info("刷新网关数据");
+
+        List<String> routes = this.listRoutesString();
+
         if (routes.isEmpty()) {
             log.error("动态网关数据为空");
         } else {

@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
+import java.util.List;
 import java.util.stream.Collectors;
 
 
@@ -86,4 +87,9 @@ public class RouteController {
         return BaseJsonRsp.ok();
     }
 
+    @ApiOperation(value = "获取网关路由配置", hidden = true)
+    @GetMapping("routes")
+    public List<String> listRoutesString() {
+        return routeService.listRoutesString();
+    }
 }

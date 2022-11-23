@@ -3,6 +3,8 @@ package com.github.zshine.auth.service;
 import com.github.zshine.auth.constant.enums.StatusEnum;
 import com.github.zshine.auth.domain.Route;
 
+import java.util.List;
+
 public interface RouteService {
 
 
@@ -37,5 +39,10 @@ public interface RouteService {
     void edit(Route route);
 
 
-
+    /**
+     * 获取网关路由配置
+     *
+     * @return list
+     */
+    List<String> listRoutesString();
 }
