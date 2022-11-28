@@ -58,8 +58,13 @@ nz-header {
   z-index: 2;
 }
 
-.app-header {
+.app-header-placeholder {
   position: relative;
+  height: 48px;
+}
+
+.app-header {
+  position: fixed;
   height: 48px;
   padding: 0;
   background: #fff;
