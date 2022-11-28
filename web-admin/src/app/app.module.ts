@@ -2,8 +2,12 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
-import {LayoutModule} from "./layout/layout.module";
 import {AppRoutingModule} from "./app-routing.module";
+import {NzLayoutModule} from "ng-zorro-antd/layout";
+import {NzMenuModule} from "ng-zorro-antd/menu";
+import {NzIconModule} from "ng-zorro-antd/icon";
+import {HttpClientModule} from "@angular/common/http";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 // import { NZ_I18N } from 'ng-zorro-antd/i18n';
 // import { zh_CN } from 'ng-zorro-antd/i18n';
 // import { registerLocaleData } from '@angular/common';
@@ -20,11 +24,13 @@ import {AppRoutingModule} from "./app-routing.module";
   ],
   imports: [
     BrowserModule,
-    LayoutModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NzLayoutModule,
+    NzMenuModule,
+    NzIconModule,
     // FormsModule,
-    // HttpClientModule,
-    // BrowserAnimationsModule
+    HttpClientModule,
+    BrowserAnimationsModule
   ],
   providers: [
     // { provide: NZ_I18N, useValue: zh_CN }
