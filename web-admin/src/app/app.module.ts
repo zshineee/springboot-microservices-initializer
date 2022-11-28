@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import {LayoutModule} from "./layout/layout.module";
+import {AppRoutingModule} from "./app-routing.module";
 // import { NZ_I18N } from 'ng-zorro-antd/i18n';
 // import { zh_CN } from 'ng-zorro-antd/i18n';
 // import { registerLocaleData } from '@angular/common';
@@ -20,6 +21,7 @@ import {LayoutModule} from "./layout/layout.module";
   imports: [
     BrowserModule,
     LayoutModule,
+    AppRoutingModule
     // FormsModule,
     // HttpClientModule,
     // BrowserAnimationsModule

@@ -18,10 +18,10 @@
       </a>
     </div>
     <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
-      <li nz-submenu nzOpen nzTitle="Dashboard" nzIcon="dashboard">
+      <li nz-submenu nzOpen nzTitle="系统设置" nzIcon="setting">
         <ul>
           <li nz-menu-item nzMatchRouter>
-            <a>Welcome</a>
+            <a routerLink="/route">路由管理</a>
           </li>
           <li nz-menu-item nzMatchRouter>
             <a>Monitor</a>
@@ -51,7 +51,7 @@
     </nz-header>
     <nz-content>
       <div class="inner-content">
-        <!--        <router-outlet></router-outlet>-->
+        <router-outlet></router-outlet>
       </div>
     </nz-content>
     <nz-footer>Ant Design Of Angular ©2022</nz-footer>

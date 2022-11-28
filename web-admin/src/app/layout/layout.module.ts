@@ -7,6 +7,8 @@ import {NzIconModule} from "ng-zorro-antd/icon";
 import {NzMenuModule} from "ng-zorro-antd/menu";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {HttpClientModule} from "@angular/common/http";
+import {RouteModule} from "../route/route.module";
+import {LayoutRoutingModule} from "./layout-routing.module";
 
 
 @NgModule({
@@ -22,7 +24,9 @@ import {HttpClientModule} from "@angular/common/http";
     NzIconModule,
     NzMenuModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+    RouteModule,
+    LayoutRoutingModule
   ]
 })
 export class LayoutModule { }
