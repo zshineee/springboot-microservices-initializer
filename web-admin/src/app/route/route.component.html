@@ -1,1 +1,36 @@
-<p>route works!</p>
+<nz-table nzShowSizeChanger
+          [nzData]="dataList"
+          [nzTotal]="total"
+          [nzPageSize]="limit"
+          [nzPageIndex]="page"
+          [nzFrontPagination]="false"
+          (nzQueryParams)="list($event)">
+  <thead>
+  <tr>
+    <th>服务名</th>
+    <th>判定器</th>
+    <th>过滤器</th>
+    <th>路径</th>
+    <th>优先级</th>
+    <th>状态</th>
+    <th>说明</th>
+    <th>操作</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let data of dataList">
+    <td>{{ data.id }}</td>
+    <td>{{ data.predicates}}</td>
+    <td>{{ data.filters }}</td>
+    <td>{{ data.uri }}</td>
+    <td>{{ data.orders }}</td>
+    <td>{{ data.statusRemark }}</td>
+    <td>{{ data.description }}</td>
+    <td>
+      <a>修改</a>
+      <nz-divider nzType="vertical"></nz-divider>
+      <a>删除</a>
+    </td>
+  </tr>
+  </tbody>
+</nz-table>
