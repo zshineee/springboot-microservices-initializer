@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {NzTableQueryParams} from "ng-zorro-antd/table";
 import {HttpClient} from "@angular/common/http";
 import {NzModalService} from "ng-zorro-antd/modal";
+import {environment} from "../../environments/environment";
 
 interface Route {
   id: string;
@@ -48,7 +48,7 @@ export class RouteComponent implements OnInit {
 
   query(page: number, limit: number): void {
     this.http
-      .get<PageJsonRsp>("/auth/route/page", {
+      .get<PageJsonRsp>(environment.contextPath + "auth/route/page", {
         params: {
           page: page,
           limit: limit
@@ -72,7 +72,7 @@ export class RouteComponent implements OnInit {
       nzOkType: 'primary',
       nzOkDanger: true,
       nzOnOk: () => {
-        this.http.delete<BaseJsonRsp>("/auth/route/delete", {
+        this.http.delete<BaseJsonRsp>(environment.contextPath + "auth/route/delete", {
           params: {
             id: id
           }
