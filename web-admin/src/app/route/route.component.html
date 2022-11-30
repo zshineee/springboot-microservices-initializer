@@ -4,7 +4,7 @@
           [nzPageSize]="limit"
           [nzPageIndex]="page"
           [nzFrontPagination]="false"
-          (nzQueryParams)="list($event)">
+          (nzQueryParams)="query(page,limit)">
   <thead>
   <tr>
     <th>服务名</th>
@@ -29,7 +29,7 @@
     <td>
       <a>修改</a>
       <nz-divider nzType="vertical"></nz-divider>
-      <a>删除</a>
+      <a (click)="delete(data.id)">删除</a>
     </td>
   </tr>
   </tbody>

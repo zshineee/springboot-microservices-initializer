@@ -5,6 +5,7 @@ import { RouteRoutingModule } from './route-routing.module';
 import { RouteComponent } from './route.component';
 import {NzTableModule} from "ng-zorro-antd/table";
 import {NzDividerModule} from "ng-zorro-antd/divider";
+import {NzModalModule} from "ng-zorro-antd/modal";
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import {NzDividerModule} from "ng-zorro-antd/divider";
     CommonModule,
     RouteRoutingModule,
     NzTableModule,
-    NzDividerModule
+    NzDividerModule,
+    NzModalModule
   ]
 })
 export class RouteModule { }
