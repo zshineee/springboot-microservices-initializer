@@ -2,8 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {NzModalService} from "ng-zorro-antd/modal";
 import {environment} from "../../environments/environment";
+import {RouteFormComponent} from "./route-form/route-form.component";
 
-interface Route {
+export interface Route {
   id: string;
   predicates: string;
   filters: string;
@@ -83,6 +84,21 @@ export class RouteComponent implements OnInit {
       },
       nzCancelText: '取消',
     });
+  }
+
+  edit(param: Route): void {
+    this.modal.create({
+      nzTitle: '修改',
+      nzOkText: '确定',
+      nzContent: RouteFormComponent,
+      nzComponentParams: {
+        param
+      },
+      nzOnOk: () => {
+        console.log("test")
+      },
+      nzCancelText: '取消',
+    })
   }
 
 }

@@ -27,7 +27,7 @@
     <td>{{ data.statusRemark }}</td>
     <td>{{ data.description }}</td>
     <td>
-      <a>修改</a>
+      <a (click)="edit(data)">修改</a>
       <nz-divider nzType="vertical"></nz-divider>
       <a (click)="delete(data.id)">删除</a>
     </td>

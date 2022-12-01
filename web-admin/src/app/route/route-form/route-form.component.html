@@ -1,0 +1,49 @@
+<form nz-form [formGroup]="routeForm">
+  <nz-form-item>
+    <nz-form-label [nzSpan]="6" nzFor="id">服务名</nz-form-label>
+    <nz-form-control [nzSpan]="14">
+      <input nz-input name="id" type="id" id="id" formControlName="id" [ngModel]="param.id"/>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="6" nzFor="predicates">判定器</nz-form-label>
+    <nz-form-control [nzSpan]="14">
+      <input nz-input name="predicates" type="predicates" id="predicates" formControlName="predicates"
+             [ngModel]="param.predicates"/>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="6" nzFor="filters">过滤器</nz-form-label>
+    <nz-form-control [nzSpan]="14">
+      <input nz-input name="filters" type="filters" id="filters" formControlName="filters" [ngModel]="param.filters"/>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="6" nzFor="uri">路径</nz-form-label>
+    <nz-form-control [nzSpan]="14">
+      <input nz-input name="uri" type="uri" id="uri" formControlName="uri" [ngModel]="param.uri"/>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="6" nzFor="orders">优先级</nz-form-label>
+    <nz-form-control [nzSpan]="14">
+      <nz-input-number name="inputnumber-success" style="width:100%"
+                       formControlName="orders" [ngModel]="param.orders"></nz-input-number>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="6" nzFor="status">状态</nz-form-label>
+    <nz-form-control [nzSpan]="14">
+      <nz-select name="status" [ngModel]="'1'" formControlName="status">
+        <nz-option nzValue="0" nzLabel="无效"></nz-option>
+        <nz-option nzValue="1" nzLabel="有效"></nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="6" nzFor="description">说明</nz-form-label>
+    <nz-form-control [nzSpan]="14">
+      <textarea formControlName="description" nz-input rows="4" [ngModel]="param.description"></textarea>
+    </nz-form-control>
+  </nz-form-item>
+</form>
