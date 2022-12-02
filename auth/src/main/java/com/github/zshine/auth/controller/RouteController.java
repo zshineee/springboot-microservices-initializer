@@ -54,36 +54,36 @@ public class RouteController {
 
     @ApiOperation(value = "新增")
     @PostMapping("/add")
-    public BaseJsonRsp add(@Valid RouteDTO add) {
+    public BaseJsonRsp add(@RequestBody @Valid RouteDTO.Post add) {
         routeService.add(add.convert());
         return BaseJsonRsp.ok();
     }
 
     @ApiOperation(value = "修改")
     @PutMapping("/edit")
-    public BaseJsonRsp edit(@Valid RouteDTO edit) {
+    public BaseJsonRsp edit(@RequestBody @Valid RouteDTO.Post edit) {
         routeService.edit(edit.convert());
         return BaseJsonRsp.ok();
     }
 
     @ApiOperation(value = "删除")
     @DeleteMapping("/delete")
-    public BaseJsonRsp delete(@ApiParam("id") @RequestParam() @CustomValidator(name = "服务名", max = 10) String id) {
-        routeService.delete(id);
+    public BaseJsonRsp delete(@RequestBody @Valid RouteDTO.Id id) {
+        routeService.delete(id.getId());
         return BaseJsonRsp.ok();
     }
 
     @ApiOperation(value = "生效")
     @PutMapping("/effect")
-    public BaseJsonRsp effect(@ApiParam("id") @RequestParam() @CustomValidator(name = "服务名", max = 10) String id) {
-        routeService.updateStatus(id, StatusEnum.EFFECT);
+    public BaseJsonRsp effect(@RequestBody @Valid RouteDTO.Id id) {
+        routeService.updateStatus(id.getId(), StatusEnum.EFFECT);
         return BaseJsonRsp.ok();
     }
 
     @ApiOperation(value = "失效")
     @PutMapping("/fail")
-    public BaseJsonRsp fail(@ApiParam("id") @RequestParam() @CustomValidator(name = "服务名", max = 10) String id) {
-        routeService.updateStatus(id, StatusEnum.FAIL);
+    public BaseJsonRsp fail(@RequestBody @Valid RouteDTO.Id id) {
+        routeService.updateStatus(id.getId(), StatusEnum.FAIL);
         return BaseJsonRsp.ok();
     }
 
