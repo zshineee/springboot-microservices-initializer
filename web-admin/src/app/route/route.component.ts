@@ -12,6 +12,7 @@ export interface Route {
   orders: number;
   description: string;
   status: number;
+  statusString: string;
   statusRemark: string;
 }
 
@@ -59,6 +60,7 @@ export class RouteComponent implements OnInit {
         this.dataList = pageData.data;
         this.dataList.map(data => {
           data.statusRemark = data.status == 1 ? "生效" : "失效"
+          data.statusString = String(data.status);
         });
         this.page = page;
         this.limit = limit;

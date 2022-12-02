@@ -34,7 +34,7 @@
   <nz-form-item>
     <nz-form-label [nzSpan]="6" nzFor="status">状态</nz-form-label>
     <nz-form-control [nzSpan]="14">
-      <nz-select name="status" [ngModel]="'1'" formControlName="status">
+      <nz-select name="status" [ngModel]="param.statusString" formControlName="status">
         <nz-option nzValue="0" nzLabel="无效"></nz-option>
         <nz-option nzValue="1" nzLabel="有效"></nz-option>
       </nz-select>
