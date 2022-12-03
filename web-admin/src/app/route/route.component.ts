@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {NzModalService} from "ng-zorro-antd/modal";
 import {environment} from "../../environments/environment";
 import {RouteFormComponent} from "./route-form/route-form.component";
+import {toNumber} from "ng-zorro-antd/core/util";
 
 export interface Route {
   id: string;
@@ -96,8 +97,14 @@ export class RouteComponent implements OnInit {
       nzComponentParams: {
         param
       },
-      nzOnOk: () => {
-        console.log("test")
+      nzOnOk: (instance) => {
+        const route = instance.routeForm.value;
+        route.status = toNumber(instance.routeForm.value.statusString);
+        this.http.put<BaseJsonRsp>(environment.contextPath + "auth/route/edit", route
+        )
+          .subscribe(() => {
+            this.query(this.page, this.limit)
+          })
       },
       nzCancelText: '取消',
     })
