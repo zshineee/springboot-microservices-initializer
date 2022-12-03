@@ -12,6 +12,7 @@ import {NzInputModule} from "ng-zorro-antd/input";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {NzSelectModule} from "ng-zorro-antd/select";
 import {NzInputNumberModule} from "ng-zorro-antd/input-number";
+import {NzCardModule} from "ng-zorro-antd/card";
 
 
 @NgModule({
@@ -19,18 +20,19 @@ import {NzInputNumberModule} from "ng-zorro-antd/input-number";
     RouteComponent,
     RouteFormComponent
   ],
-  imports: [
-    CommonModule,
-    RouteRoutingModule,
-    NzTableModule,
-    NzDividerModule,
-    NzModalModule,
-    NzFormModule,
-    NzInputModule,
-    ReactiveFormsModule,
-    NzSelectModule,
-    FormsModule,
-    NzInputNumberModule
-  ]
+    imports: [
+        CommonModule,
+        RouteRoutingModule,
+        NzTableModule,
+        NzDividerModule,
+        NzModalModule,
+        NzFormModule,
+        NzInputModule,
+        ReactiveFormsModule,
+        NzSelectModule,
+        FormsModule,
+        NzInputNumberModule,
+        NzCardModule
+    ]
 })
 export class RouteModule { }
