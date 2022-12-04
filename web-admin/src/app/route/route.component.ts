@@ -110,4 +110,23 @@ export class RouteComponent implements OnInit {
     })
   }
 
+  add(): void {
+    this.modal.create({
+      nzTitle: '修改',
+      nzOkText: '确定',
+      nzContent: RouteFormComponent,
+      nzComponentParams: {},
+      nzOnOk: (instance) => {
+        const route = instance.routeForm.value;
+        route.status = toNumber(instance.routeForm.value.status);
+        this.http.post<BaseJsonRsp>(environment.contextPath + "auth/route/add", route
+        )
+          .subscribe(() => {
+            this.query(this.page, this.limit)
+          })
+      },
+      nzCancelText: '取消',
+    })
+  }
+
 }

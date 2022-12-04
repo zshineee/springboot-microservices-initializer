@@ -15,15 +15,27 @@ export class RouteFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.routeForm = new FormGroup({
-      id: new FormControl(this.param.id),
-      predicates: new FormControl(this.param.predicates),
-      filters: new FormControl(this.param.filters),
-      uri: new FormControl(this.param.uri),
-      orders: new FormControl(this.param.orders),
-      status: new FormControl(this.param.statusString),
-      description: new FormControl(this.param.description)
-    });
+    if (this.param == undefined || null) {
+      this.routeForm = new FormGroup({
+        id: new FormControl(),
+        predicates: new FormControl(),
+        filters: new FormControl(),
+        uri: new FormControl(),
+        orders: new FormControl(),
+        status: new FormControl(),
+        description: new FormControl()
+      });
+    } else {
+      this.routeForm = new FormGroup({
+        id: new FormControl(this.param.id),
+        predicates: new FormControl(this.param.predicates),
+        filters: new FormControl(this.param.filters),
+        uri: new FormControl(this.param.uri),
+        orders: new FormControl(this.param.orders),
+        status: new FormControl(this.param.statusString),
+        description: new FormControl(this.param.description)
+      });
+    }
   }
 
 }

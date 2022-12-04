@@ -1,3 +1,14 @@
 .nz-table {
   background: #fff;
 }
+
+.button-layout {
+  height: 64px;
+  background: #fff;
+  padding: 16px 16px 16px 24px;
+}
+
+.search-layout {
+  margin-bottom: 10px;
+  height: 80px
+}

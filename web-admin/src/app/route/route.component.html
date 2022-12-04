@@ -1,7 +1,8 @@
 <nz-card style="margin-bottom: 10px;height: 80px">
 </nz-card>
-<nz-card style="height: 64px">
-</nz-card>
+<div class="button-layout">
+  <button nz-button nzType="primary" (click)="add()"><span nz-icon nzType="plus"></span>新增</button>
+</div>
 <nz-card>
 <nz-table nzShowSizeChanger
           [nzData]="dataList"
