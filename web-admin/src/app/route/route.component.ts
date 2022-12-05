@@ -4,6 +4,7 @@ import {NzModalService} from "ng-zorro-antd/modal";
 import {environment} from "../../environments/environment";
 import {RouteFormComponent} from "./route-form/route-form.component";
 import {toNumber} from "ng-zorro-antd/core/util";
+import {UntypedFormBuilder, UntypedFormGroup} from "@angular/forms";
 
 export interface Route {
   id: string;
@@ -37,16 +38,52 @@ interface BaseJsonRsp {
 })
 export class RouteComponent implements OnInit {
 
+  //是否关闭
+  isCollapse = true;
   dataList: Route[] = [];
   page = 1;
   limit = 10;
   total = 0;
+  controlArray: Array<{ index: number; show: boolean; name: string }> = [];
+  tableNames = ['服务名', '判定器', '过滤器', '路径', '优先级', '状态', '说明'];
+  detail = this.searchLayoutDetail();
+  validateForm!: UntypedFormGroup;
 
-
-  constructor(private http: HttpClient, private modal: NzModalService) {
+  constructor(private http: HttpClient, private modal: NzModalService, private fb: UntypedFormBuilder) {
   }
 
   ngOnInit(): void {
+    this.validateForm = this.fb.group({});
+    for (let i = 0; i < this.detail.total - this.detail.blank; i++) {
+      this.controlArray.push({index: i, show: i < this.detail.show, name: this.tableNames[i].valueOf()});
+    }
+  }
+
+  toggleCollapse() {
+    this.isCollapse = !this.isCollapse;
+    this.controlArray.forEach((c, index) => {
+      c.show = !this.isCollapse ? true : index < this.detail.show;
+    });
+  }
+
+  searchLayoutDetail(): { total: number, show: number, blank: number } {
+
+    const blank = 2 - this.tableNames.length % 3;
+
+    return {
+      blank: blank,
+      total: this.tableNames.length + blank,
+      show: this.tableNames.length < 3 ? this.tableNames.length : 2
+    }
+
+  }
+
+  reset(): void {
+    this.validateForm.reset();
+    this.page = 1;
+    this.limit = 10;
+    this.total = 0;
+    this.query(this.page, this.limit);
   }
 
   query(page: number, limit: number): void {
