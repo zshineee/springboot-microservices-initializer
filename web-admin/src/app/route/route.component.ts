@@ -4,7 +4,7 @@ import {NzModalService} from "ng-zorro-antd/modal";
 import {environment} from "../../environments/environment";
 import {RouteFormComponent} from "./route-form/route-form.component";
 import {toNumber} from "ng-zorro-antd/core/util";
-import {UntypedFormBuilder, UntypedFormGroup} from "@angular/forms";
+import {UntypedFormBuilder, UntypedFormControl, UntypedFormGroup} from "@angular/forms";
 
 export interface Route {
   id: string;
@@ -44,8 +44,15 @@ export class RouteComponent implements OnInit {
   page = 1;
   limit = 10;
   total = 0;
-  controlArray: Array<{ index: number; show: boolean; name: string }> = [];
-  tableNames = ['服务名', '判定器', '过滤器', '路径', '优先级', '状态', '说明'];
+  controlArray: Array<{ index: number; show: boolean; name: string; id: string }> = [];
+  tableNames = [{name: '服务名', id: 'id'}, {name: '判定器', id: 'predicates'}, {
+    name: '过滤器',
+    id: 'filters'
+  }, {name: '路径', id: 'uri'}, {name: '优先级', id: 'orders'}, {name: '状态', id: 'statusString'}, {
+    name: '说明',
+    id: 'description'
+  }];
+  route?: Route;
   detail = this.searchLayoutDetail();
   validateForm!: UntypedFormGroup;
 
@@ -55,7 +62,13 @@ export class RouteComponent implements OnInit {
   ngOnInit(): void {
     this.validateForm = this.fb.group({});
     for (let i = 0; i < this.detail.total - this.detail.blank; i++) {
-      this.controlArray.push({index: i, show: i < this.detail.show, name: this.tableNames[i].valueOf()});
+      this.controlArray.push({
+        index: i,
+        show: i < this.detail.show,
+        name: this.tableNames[i].name,
+        id: this.tableNames[i].id
+      });
+      this.validateForm.addControl(this.tableNames[i].id, new UntypedFormControl());
     }
   }
 
@@ -83,15 +96,37 @@ export class RouteComponent implements OnInit {
     this.page = 1;
     this.limit = 10;
     this.total = 0;
+    this.route = undefined;
     this.query(this.page, this.limit);
   }
 
+
   query(page: number, limit: number): void {
+    //todo
+    this.route = {
+      id: this.validateForm.controls.hasOwnProperty('id') ? this.validateForm.controls['id'].value : null,
+      predicates: this.validateForm.controls.hasOwnProperty('predicates') ? this.validateForm.controls['predicates'].value : null,
+      filters: this.validateForm.controls.hasOwnProperty('filters') ? this.validateForm.controls['filters'].value : null,
+      description: this.validateForm.controls.hasOwnProperty('description') ? this.validateForm.controls['description'].value : null,
+      orders: this.validateForm.controls.hasOwnProperty('orders') ? this.validateForm.controls['orders'].value : null,
+      status: this.validateForm.controls.hasOwnProperty('statusString') ? this.validateForm.controls['statusString'].value : null,
+      statusRemark: this.validateForm.controls.hasOwnProperty('statusRemark') ? this.validateForm.controls['statusRemark'].value : null,
+      statusString: this.validateForm.controls.hasOwnProperty('statusString') ? this.validateForm.controls['statusString'].value : null,
+      uri: this.validateForm.controls.hasOwnProperty('uri') ? this.validateForm.controls['uri'].value : null
+    };
+
     this.http
       .get<PageJsonRsp>(environment.contextPath + "auth/route/page", {
         params: {
           page: page,
-          limit: limit
+          limit: limit,
+          id: this.route.id,
+          predicates: this.route.predicates,
+          filters: this.route.filters,
+          uri: this.route.uri,
+          orders: this.route.orders,
+          description: this.route.description,
+          status: this.route.status
         }
       })
       .subscribe(pageData => {
