@@ -76,6 +76,9 @@ export class RouteComponent implements OnInit {
     this.isCollapse = !this.isCollapse;
     this.controlArray.forEach((c, index) => {
       c.show = !this.isCollapse ? true : index < this.detail.show;
+      if (c.show) {
+        this.validateForm.controls[c.id].setValue("")
+      }
     });
   }
 
@@ -102,7 +105,6 @@ export class RouteComponent implements OnInit {
 
 
   query(page: number, limit: number): void {
-    //todo
     this.route = {
       id: this.validateForm.controls.hasOwnProperty('id') ? this.validateForm.controls['id'].value : null,
       predicates: this.validateForm.controls.hasOwnProperty('predicates') ? this.validateForm.controls['predicates'].value : null,
