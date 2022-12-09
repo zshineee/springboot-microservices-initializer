@@ -7,7 +7,7 @@ import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class RouteVO extends RouteDTO {
+public class RouteVO extends RouteDTO.Post {
 
 
 
