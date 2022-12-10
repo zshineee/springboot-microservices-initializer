@@ -1,12 +1,9 @@
 package com.github.zshine.auth.controller;
 
-import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
-import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.github.zshine.auth.constant.enums.StatusEnum;
 import com.github.zshine.auth.controller.dto.RouteDTO;
 import com.github.zshine.auth.controller.vo.RouteVO;
-import com.github.zshine.auth.dao.RouteDao;
 import com.github.zshine.auth.domain.Route;
 import com.github.zshine.auth.service.RouteService;
 import com.github.zshine.common.response.BaseJsonRsp;
@@ -35,17 +32,12 @@ public class RouteController {
     @Resource
     private RouteService routeService;
 
-    @Resource
-    private RouteDao routeDao;
-
-
     @ApiOperation(value = "分页查询")
     @GetMapping("/page")
     public PageJsonRsp<RouteVO> page(@ApiParam("查询页数") @RequestParam() @CustomValidator(pattern = PatternEnum.NATURE, name = "查询页数") Integer page,
                                      @ApiParam("查询条数") @RequestParam() @CustomValidator(pattern = PatternEnum.NATURE, name = "查询条数") Integer limit,
                                      @ApiParam("状态") @RequestParam(required = false) @CustomValidator(enumClass = StatusEnum.class, name = "状态") Integer status) {
-        Page<Route> pageData = routeDao.page(new Page<>(page, limit), Wrappers.<Route>lambdaQuery()
-                .eq(!ObjectUtils.isEmpty(status), Route::getStatus, status));
+        Page<Route> pageData = routeService.page(page, limit, status);
         return PageJsonRsp.ok(pageData.getRecords()
                 .stream()
                 .map(Route::convert)

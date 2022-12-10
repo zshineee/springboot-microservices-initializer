@@ -1,5 +1,6 @@
 package com.github.zshine.auth.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.github.zshine.auth.constant.enums.StatusEnum;
 import com.github.zshine.auth.domain.Route;
 
@@ -7,6 +8,16 @@ import java.util.List;
 
 public interface RouteService {
 
+
+    /**
+     * 分页查询
+     *
+     * @param page   页码
+     * @param limit  查询条数
+     * @param status 状态（非必填）
+     * @return page pojo
+     */
+    Page<Route> page(Integer page, Integer limit, Integer status);
 
     /**
      * 更新状态

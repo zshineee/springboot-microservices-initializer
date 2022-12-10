@@ -1,6 +1,8 @@
 package com.github.zshine.auth.service.impl;
 
+import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
@@ -29,6 +31,12 @@ public class RouteServiceImpl implements RouteService {
     @Resource
     private RouteDao routeDao;
 
+    @Override
+    public Page<Route> page(Integer page, Integer limit, Integer status) {
+        return routeDao.page(new Page<>(page, limit), Wrappers.<Route>lambdaQuery()
+                .eq(!ObjectUtils.isEmpty(status), Route::getStatus, status));
+    }
+
 
     @Override
     public void updateStatus(String id, StatusEnum statusEnum) {
@@ -48,6 +56,7 @@ public class RouteServiceImpl implements RouteService {
 
     @Override
     public void add(Route route) {
+        this.checkExistById(route.getId());
         routeDao.save(route);
         this.refresh();
     }
@@ -112,4 +121,7 @@ public class RouteServiceImpl implements RouteService {
         return route;
     }
 
+    private void checkExistById(String id) {
+        AssertUtil.mustNull(routeDao.getById(id), Constants.EXIST_ERROR_MESSAGE);
+    }
 }
