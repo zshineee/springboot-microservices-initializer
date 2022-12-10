@@ -9,4 +9,11 @@ public class AssertUtil {
             throw new BusinessException(errMsg);
         }
     }
+
+
+    public static void mustNull(Object obj, String errMsg) {
+        if (obj == null) {
+            throw new BusinessException(errMsg);
+        }
+    }
 }

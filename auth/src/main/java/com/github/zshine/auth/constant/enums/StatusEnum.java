@@ -9,8 +9,8 @@ public enum StatusEnum implements EnumMsg {
     /**
      * 状态
      */
-    EFFECT(1, "有效"),
-    FAIL(0, "无效");
+    EFFECT(1, "是"),
+    FAIL(0, "否");
 
     @EnumValue
     private final int code;
