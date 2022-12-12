@@ -38,13 +38,7 @@ public class RouteServiceImpl implements RouteService {
     }
 
 
-    @Override
-    public void updateStatus(String id, StatusEnum statusEnum) {
-        Route route = this.getAndCheckNullById(id);
-        route.setStatus(statusEnum);
-        routeDao.updateById(route);
-        this.refresh();
-    }
+
 
 
     @Override

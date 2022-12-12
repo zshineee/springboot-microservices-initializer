@@ -1,7 +1,6 @@
 package com.github.zshine.auth.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.github.zshine.auth.constant.enums.StatusEnum;
 import com.github.zshine.auth.domain.User;
 
 public interface UserService {
@@ -16,13 +15,6 @@ public interface UserService {
      */
     Page<User> page(Integer page, Integer limit, Integer status);
 
-    /**
-     * 更新状态
-     *
-     * @param username   主键
-     * @param statusEnum 状态
-     */
-    void updateStatus(String username, StatusEnum statusEnum);
 
 
     /**

@@ -1,7 +1,6 @@
 package com.github.zshine.auth.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.github.zshine.auth.constant.enums.StatusEnum;
 import com.github.zshine.auth.domain.Route;
 
 import java.util.List;
@@ -19,13 +18,6 @@ public interface RouteService {
      */
     Page<Route> page(Integer page, Integer limit, Integer status);
 
-    /**
-     * 更新状态
-     *
-     * @param id         主键
-     * @param statusEnum 状态
-     */
-    void updateStatus(String id, StatusEnum statusEnum);
 
 
     /**

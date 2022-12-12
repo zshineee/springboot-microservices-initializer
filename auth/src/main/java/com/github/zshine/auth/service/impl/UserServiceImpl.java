@@ -29,12 +29,6 @@ public class UserServiceImpl implements UserService {
                 .eq(!ObjectUtils.isEmpty(status), User::getStatus, status));
     }
 
-    @Override
-    public void updateStatus(String username, StatusEnum statusEnum) {
-        User user = this.getAndCheckNullByUsername(username);
-        user.setStatus(statusEnum);
-        userDao.updateById(user);
-    }
 
     @Override
     public void delete(String username) {

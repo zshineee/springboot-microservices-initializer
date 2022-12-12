@@ -65,19 +65,6 @@ public class UserController {
         return BaseJsonRsp.ok();
     }
 
-    @ApiOperation(value = "生效")
-    @PutMapping("/effect")
-    public BaseJsonRsp effect(@RequestBody @Valid UserDTO.Id id) {
-        userService.updateStatus(id.getUsername(), StatusEnum.EFFECT);
-        return BaseJsonRsp.ok();
-    }
-
-    @ApiOperation(value = "失效")
-    @PutMapping("/fail")
-    public BaseJsonRsp fail(@RequestBody @Valid UserDTO.Id id) {
-        userService.updateStatus(id.getUsername(), StatusEnum.FAIL);
-        return BaseJsonRsp.ok();
-    }
 
 }
 

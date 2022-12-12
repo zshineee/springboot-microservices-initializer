@@ -65,19 +65,6 @@ public class RouteController {
         return BaseJsonRsp.ok();
     }
 
-    @ApiOperation(value = "生效")
-    @PutMapping("/effect")
-    public BaseJsonRsp effect(@RequestBody @Valid RouteDTO.Id id) {
-        routeService.updateStatus(id.getId(), StatusEnum.EFFECT);
-        return BaseJsonRsp.ok();
-    }
-
-    @ApiOperation(value = "失效")
-    @PutMapping("/fail")
-    public BaseJsonRsp fail(@RequestBody @Valid RouteDTO.Id id) {
-        routeService.updateStatus(id.getId(), StatusEnum.FAIL);
-        return BaseJsonRsp.ok();
-    }
 
     @ApiOperation(value = "获取网关路由配置", hidden = true)
     @GetMapping("routes")
