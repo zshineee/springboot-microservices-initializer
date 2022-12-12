@@ -5,6 +5,8 @@ import {environment} from "../../environments/environment";
 import {RouteFormComponent} from "./route-form/route-form.component";
 import {toNumber} from "ng-zorro-antd/core/util";
 import {UntypedFormBuilder, UntypedFormControl, UntypedFormGroup} from "@angular/forms";
+import {PageJsonRsp} from "../common/domain/PageJsonRsp";
+import {BaseJsonRsp} from "../common/domain/BaseJsonRsp";
 
 export interface Route {
   id: string;
@@ -14,10 +16,12 @@ export interface Route {
   orders: number;
   description: string;
   status: number;
+  //status string类型
   statusString: string;
+  //说明
   statusRemark: string;
-}
 
+}
 
 @Component({
   selector: 'app-route',
@@ -26,22 +30,11 @@ export interface Route {
 })
 export class RouteComponent implements OnInit {
 
-  //是否关闭
-  isCollapse = true;
+
   dataList: Route[] = [];
   page = 1;
   limit = 10;
   total = 0;
-  controlArray: Array<{ index: number; show: boolean; name: string; id: string }> = [];
-  tableNames = [{name: '服务名', id: 'id'}, {name: '判定器', id: 'predicates'}, {
-    name: '过滤器',
-    id: 'filters'
-  }, {name: '路径', id: 'uri'}, {name: '优先级', id: 'orders'}, {name: '状态', id: 'statusString'}, {
-    name: '说明',
-    id: 'description'
-  }];
-  route?: Route;
-  detail = this.searchLayoutDetail();
   validateForm!: UntypedFormGroup;
 
   constructor(private http: HttpClient, private modal: NzModalService, private fb: UntypedFormBuilder) {
@@ -49,74 +42,27 @@ export class RouteComponent implements OnInit {
 
   ngOnInit(): void {
     this.validateForm = this.fb.group({});
-    for (let i = 0; i < this.detail.total - this.detail.blank; i++) {
-      this.controlArray.push({
-        index: i,
-        show: i < this.detail.show,
-        name: this.tableNames[i].name,
-        id: this.tableNames[i].id
-      });
-      this.validateForm.addControl(this.tableNames[i].id, new UntypedFormControl());
-    }
+    this.validateForm.addControl('status', new UntypedFormControl());
   }
 
-  toggleCollapse() {
-    this.isCollapse = !this.isCollapse;
-    this.controlArray.forEach((c, index) => {
-      c.show = !this.isCollapse ? true : index < this.detail.show;
-      if (c.show) {
-        this.validateForm.controls[c.id].setValue("")
-      }
-    });
-  }
-
-  searchLayoutDetail(): { total: number, show: number, blank: number } {
-
-    const blank = 2 - this.tableNames.length % 3;
-
-    return {
-      blank: blank,
-      total: this.tableNames.length + blank,
-      show: this.tableNames.length < 3 ? this.tableNames.length : 2
-    }
-
-  }
 
   reset(): void {
     this.validateForm.reset();
     this.page = 1;
     this.limit = 10;
     this.total = 0;
-    this.route = undefined;
     this.query(this.page, this.limit);
   }
 
 
   query(page: number, limit: number): void {
-    this.route = {
-      id: this.validateForm.controls.hasOwnProperty('id') ? this.validateForm.controls['id'].value : null,
-      predicates: this.validateForm.controls.hasOwnProperty('predicates') ? this.validateForm.controls['predicates'].value : null,
-      filters: this.validateForm.controls.hasOwnProperty('filters') ? this.validateForm.controls['filters'].value : null,
-      description: this.validateForm.controls.hasOwnProperty('description') ? this.validateForm.controls['description'].value : null,
-      orders: this.validateForm.controls.hasOwnProperty('orders') ? this.validateForm.controls['orders'].value : null,
-      status: this.validateForm.controls.hasOwnProperty('statusString') ? this.validateForm.controls['statusString'].value : null,
-      statusRemark: this.validateForm.controls.hasOwnProperty('statusRemark') ? this.validateForm.controls['statusRemark'].value : null,
-      statusString: this.validateForm.controls.hasOwnProperty('statusString') ? this.validateForm.controls['statusString'].value : null,
-      uri: this.validateForm.controls.hasOwnProperty('uri') ? this.validateForm.controls['uri'].value : null
-    };
-
+    const status = this.validateForm.controls['status'].value;
     this.http
       .get<PageJsonRsp<Route>>(environment.contextPath + "auth/route/page", {
         params: {
           page: page,
           limit: limit,
-          id: this.route.id,
-          predicates: this.route.predicates,
-          filters: this.route.filters,
-          uri: this.route.uri,
-          orders: this.route.orders,
-          description: this.route.description,
-          status: this.route.status
+          status: status == null ? '' : status
         }
       })
       .subscribe(pageData => {
@@ -131,6 +77,7 @@ export class RouteComponent implements OnInit {
       });
   }
 
+
   delete(id: string): void {
     this.modal.confirm({
       nzTitle: '确定要删除吗?',
@@ -138,11 +85,8 @@ export class RouteComponent implements OnInit {
       nzOkType: 'primary',
       nzOkDanger: true,
       nzOnOk: () => {
-        this.http.delete<BaseJsonRsp>(environment.contextPath + "auth/route/delete", {
-          params: {
-            id: id
-          }
-        })
+        this.http.delete<BaseJsonRsp>(environment.contextPath + "auth/route/delete", {body: {id: id}}
+        )
           .subscribe(() => {
             this.query(this.page, this.limit)
           })

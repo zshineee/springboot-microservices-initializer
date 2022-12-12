@@ -1,24 +1,22 @@
 <form class="search-layout" [formGroup]="validateForm" nz-form>
   <div nz-row [nzGutter]="24">
-    <div nz-col [nzSpan]="8" *ngFor="let control of controlArray" [hidden]="!control.show">
+    <div nz-col [nzSpan]="8" style="text-align: right">
       <nz-form-item>
-        <nz-form-label [nzSpan]="2">{{control.name}}</nz-form-label>
-        <nz-form-control [nzSpan]="22">
-          <input nz-input [formControlName]="control.id">
+        <nz-form-label [nzSpan]="2">状态</nz-form-label>
+        <nz-form-control [nzSpan]="14">
+          <nz-select  formControlName="status">
+            <nz-option nzValue="0" nzLabel="无效"></nz-option>
+            <nz-option nzValue="1" nzLabel="有效"></nz-option>
+          </nz-select>
         </nz-form-control>
       </nz-form-item>
     </div>
-    <div nz-col [nzSpan]="8" style="text-align: right" [hidden]=isCollapse>
-    </div>
+    <div nz-col [nzSpan]="8"></div>
     <div nz-col [nzSpan]="8" style="text-align: right">
       <button nz-col nz-button nzType="primary" (click)="query(page,limit)"><span nz-icon nzType="search"></span>查询
       </button>
       <button style="margin-left: 15px" nz-col nz-button (click)="reset()"><span nz-icon nzType="close-circle"></span>重置
       </button>
-      <a style="margin-left: 8px" (click)="toggleCollapse()">
-        展开
-        <span nz-icon [nzType]="isCollapse ? 'down' : 'up'"></span>
-      </a>
     </div>
   </div>
 </form>

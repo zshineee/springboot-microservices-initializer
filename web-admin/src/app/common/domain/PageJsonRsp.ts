@@ -1,4 +1,4 @@
-interface PageJsonRsp<T> {
+export interface PageJsonRsp<T> {
   pages: number,
   total: number,
   data: T[];
