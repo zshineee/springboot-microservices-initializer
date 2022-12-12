@@ -18,18 +18,6 @@ export interface Route {
   statusRemark: string;
 }
 
-interface PageJsonRsp {
-  pages: number,
-  total: number,
-  data: Route[];
-  success: boolean;
-  errMsg: string;
-}
-
-interface BaseJsonRsp {
-  success: boolean;
-  errMsg: string;
-}
 
 @Component({
   selector: 'app-route',
@@ -118,7 +106,7 @@ export class RouteComponent implements OnInit {
     };
 
     this.http
-      .get<PageJsonRsp>(environment.contextPath + "auth/route/page", {
+      .get<PageJsonRsp<Route>>(environment.contextPath + "auth/route/page", {
         params: {
           page: page,
           limit: limit,
