@@ -1,1 +1,32 @@
-<p>user works!</p>
+<button class="button" nz-button nzType="primary" (click)="add()"><span nz-icon nzType="plus"></span>新增</button>
+<nz-divider></nz-divider>
+<nz-table class="nz-table" nzShowSizeChanger nzBordered
+          [nzData]="dataList"
+          [nzTotal]="total"
+          [nzPageSize]="limit"
+          [nzPageIndex]="page"
+          [nzFrontPagination]="false"
+          (nzQueryParams)="query(page,limit)">
+  <thead>
+  <tr>
+    <th>用户名</th>
+    <th>超级用户</th>
+    <th>状态</th>
+    <th>说明</th>
+    <th>操作</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let data of dataList">
+    <td>{{ data.fullname}}</td>
+    <td>{{ data.supperRemark }}</td>
+    <td>{{ data.statusRemark }}</td>
+    <td>{{ data.remark }}</td>
+    <td>
+      <a (click)="edit(data)">修改</a>
+      <nz-divider nzType="vertical"></nz-divider>
+      <a (click)="delete(data.username)">删除</a>
+    </td>
+  </tr>
+  </tbody>
+</nz-table>
