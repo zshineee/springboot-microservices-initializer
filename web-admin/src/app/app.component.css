@@ -72,6 +72,14 @@ nz-header {
   background: #fff;
   line-height: 48px;
   box-shadow: 0 1px 4px rgba(0, 21, 41, .08);
+  right: 0;
+  width: calc(100% - 256px);
+  transition: width 0.2s;
+  justify-content: space-between;
+}
+
+.app-header-Collapsed {
+  width: calc(100% - 80px);
 }
 
 nz-content {

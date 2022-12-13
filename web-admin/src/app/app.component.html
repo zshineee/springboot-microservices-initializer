@@ -45,7 +45,7 @@
     <!-- 占位 -->
     <nz-header class="app-header-placeholder">
     </nz-header>
-    <nz-header class="app-header">
+    <nz-header class="app-header"  [ngClass]="{'app-header-Collapsed':isCollapsed}">
         <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
             <span class="trigger"
                   nz-icon
