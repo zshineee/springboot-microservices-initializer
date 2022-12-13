@@ -1,17 +1,7 @@
+.button {
+  margin: 24px 24px 0
+}
+
 .nz-table {
-  background: #fff;
-}
-
-.button-layout {
-  height: 64px;
-  background: #fff;
-  padding: 16px 16px 16px 24px;
-}
-
-.search-layout {
-  margin-bottom: 10px;
-  padding-left: 24px;
-  padding-top: 24px;
-  padding-right: 24px;
-  background: #fff;
+  margin: 24px 24px 24px 24px
 }

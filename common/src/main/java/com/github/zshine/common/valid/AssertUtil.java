@@ -12,7 +12,7 @@ public class AssertUtil {
 
 
     public static void mustNull(Object obj, String errMsg) {
-        if (obj == null) {
+        if (obj != null) {
             throw new BusinessException(errMsg);
         }
     }

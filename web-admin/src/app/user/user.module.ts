@@ -13,10 +13,13 @@ import {NzIconModule} from "ng-zorro-antd/icon";
 import {NzDividerModule} from "ng-zorro-antd/divider";
 import {NzModalModule} from "ng-zorro-antd/modal";
 import {NzMessageModule} from "ng-zorro-antd/message";
+import { UserFormComponent } from './user-form/user-form.component';
+import {NzInputModule} from "ng-zorro-antd/input";
+import {NzInputNumberModule} from "ng-zorro-antd/input-number";
 
 
 @NgModule({
-  declarations: [UserComponent],
+  declarations: [UserComponent, UserFormComponent],
   imports: [
     CommonModule,
     UserRoutingModule,
@@ -29,7 +32,9 @@ import {NzMessageModule} from "ng-zorro-antd/message";
     NzIconModule,
     NzDividerModule,
     NzModalModule,
-    NzMessageModule
+    NzMessageModule,
+    NzInputModule,
+    NzInputNumberModule
   ]
 })
 export class UserModule { }

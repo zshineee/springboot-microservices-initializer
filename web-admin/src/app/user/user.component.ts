@@ -5,19 +5,18 @@ import {PageJsonRsp} from "../common/domain/PageJsonRsp";
 import {HttpClient} from "@angular/common/http";
 import {NzModalService} from "ng-zorro-antd/modal";
 import {NzMessageService} from "ng-zorro-antd/message";
+import {toNumber} from "ng-zorro-antd/core/util";
+import {UserFormComponent} from "./user-form/user-form.component";
 
 export interface User {
   username: string;
   fullname: string;
+  password: string;
   remark: string;
   status: number;
-  //status string类型
-  statusString: string;
   //status 说明
   statusRemark: string;
   supper: number;
-  //supper string类型
-  supperString: string;
   // supper 说明
   supperRemark: string;
 }
@@ -85,11 +84,45 @@ export class UserComponent implements OnInit {
   }
 
   edit(param: User): void {
-
+    this.modal.create({
+      nzTitle: '修改',
+      nzOkText: '确定',
+      nzContent: UserFormComponent,
+      nzComponentParams: {
+        param
+      },
+      nzOnOk: (instance) => {
+        const user = instance.userForm.value;
+        user.status = toNumber(instance.userForm.value.status);
+        user.supper = toNumber(instance.userForm.value.supper);
+        this.http.put<BaseJsonRsp>(environment.contextPath + "auth/user/edit", user
+        )
+          .subscribe(() => {
+            this.query(this.page, this.limit)
+          })
+      },
+      nzCancelText: '取消',
+    })
   }
 
   add(): void {
-
+    this.modal.create({
+      nzTitle: '修改',
+      nzOkText: '确定',
+      nzContent: UserFormComponent,
+      nzComponentParams: {},
+      nzOnOk: (instance) => {
+        const user = instance.userForm.value;
+        user.status = toNumber(instance.userForm.value.status);
+        user.supper = toNumber(instance.userForm.value.supper);
+        this.http.post<BaseJsonRsp>(environment.contextPath + "auth/user/add", user
+        )
+          .subscribe(() => {
+            this.query(this.page, this.limit)
+          })
+      },
+      nzCancelText: '取消',
+    })
   }
 
 }

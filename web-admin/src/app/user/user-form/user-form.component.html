@@ -1,0 +1,44 @@
+<form nz-form [formGroup]="userForm">
+  <nz-form-item>
+    <nz-form-label [nzSpan]="6">用户名</nz-form-label>
+    <nz-form-control [nzSpan]="14">
+      <input nz-input formControlName="username"/>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item [hidden]="password">
+    <nz-form-label [nzSpan]="6">密码</nz-form-label>
+    <nz-form-control [nzSpan]="14">
+      <input nz-input formControlName="password"/>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="6">全称</nz-form-label>
+    <nz-form-control [nzSpan]="14">
+      <input nz-input formControlName="fullname"/>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="6">状态</nz-form-label>
+    <nz-form-control [nzSpan]="14">
+      <nz-select formControlName="status">
+        <nz-option nzValue="0" nzLabel="无效"></nz-option>
+        <nz-option nzValue="1" nzLabel="有效"></nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="6">超级用户</nz-form-label>
+    <nz-form-control [nzSpan]="14">
+      <nz-select formControlName="supper">
+        <nz-option nzValue="0" nzLabel="否"></nz-option>
+        <nz-option nzValue="1" nzLabel="是"></nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="6">说明</nz-form-label>
+    <nz-form-control [nzSpan]="14">
+      <textarea formControlName="description" nz-input rows="4"></textarea>
+    </nz-form-control>
+  </nz-form-item>
+</form>
