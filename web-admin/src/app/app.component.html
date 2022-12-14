@@ -45,13 +45,14 @@
     <!-- 占位 -->
     <nz-header class="app-header-placeholder">
     </nz-header>
-    <nz-header class="app-header"  [ngClass]="{'app-header-Collapsed':isCollapsed}">
-        <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
-            <span class="trigger"
-                  nz-icon
-                  [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
-            ></span>
+    <nz-header class="app-header" [ngClass]="{'app-header-Collapsed':isCollapsed}">
+      <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
+            <span class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"></span>
         </span>
+      <span class="header-user">
+      <nz-avatar class="nz-avatar" nzSize="small" nzIcon="user"></nz-avatar>
+        <span>最高管理员</span>
+      </span>
     </nz-header>
     <nz-content>
       <div class="inner-content">

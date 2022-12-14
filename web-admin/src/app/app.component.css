@@ -1,6 +1,7 @@
 .app-layout {
   min-height: 100vh;
 }
+
 .menu-sidebar-placeholder {
   position: relative;
 }
@@ -16,12 +17,30 @@
 }
 
 .header-trigger {
-  height: 48px;
-  padding: 14px 24px;
+  transition: all .3s, padding 0s, color .3s;
   font-size: 20px;
+  line-height: 48px;
   cursor: pointer;
-  transition: all .3s, padding 0s;
+  z-index: 10;
+  padding: 0 24px 8px;
 }
+
+.header-user {
+  cursor: pointer;
+  padding: 0 12px;
+  margin-right: 10px;
+  display: inline-block;
+  transition: all .3s;
+  height: 100%;
+  font-size: 16px;
+}
+
+.nz-avatar {
+  margin-right: 10px;
+  margin-bottom: 4px;
+  background: #1890ff;
+}
+
 
 .trigger:hover {
   color: #1890ff;
@@ -76,6 +95,8 @@ nz-header {
   width: calc(100% - 256px);
   transition: width 0.2s;
   justify-content: space-between;
+  display: flex;
+  align-items: center;
 }
 
 .app-header-Collapsed {

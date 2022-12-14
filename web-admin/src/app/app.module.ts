@@ -8,6 +8,7 @@ import {NzMenuModule} from "ng-zorro-antd/menu";
 import {NzIconModule} from "ng-zorro-antd/icon";
 import {HttpClientModule} from "@angular/common/http";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {NzAvatarModule} from "ng-zorro-antd/avatar";
 // import { NZ_I18N } from 'ng-zorro-antd/i18n';
 // import { zh_CN } from 'ng-zorro-antd/i18n';
 // import { registerLocaleData } from '@angular/common';
@@ -30,7 +31,8 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     NzIconModule,
     // FormsModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    NzAvatarModule
   ],
   providers: [
     // { provide: NZ_I18N, useValue: zh_CN }
