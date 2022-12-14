@@ -6,6 +6,14 @@ import com.github.zshine.auth.domain.User;
 public interface UserService {
 
     /**
+     * 登录
+     *
+     * @param username 用户名
+     * @param password 密码
+     */
+    void login(String username, String password);
+
+    /**
      * 分页查询
      *
      * @param page   页码
@@ -14,7 +22,6 @@ public interface UserService {
      * @return page pojo
      */
     Page<User> page(Integer page, Integer limit, Integer status);
-
 
 
     /**

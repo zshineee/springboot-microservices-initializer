@@ -53,4 +53,19 @@ public class UserDTO {
 
     }
 
+
+    @Data
+    public static class Login {
+
+        @ApiModelProperty(notes = "用户名")
+        @CustomValidator(name = "用户名", max = 32, notnull = true)
+        protected String username;
+
+
+        @ApiModelProperty(notes = "密码")
+        @CustomValidator(name = "密码", max = 32, notnull = true)
+        protected String password;
+
+    }
+
 }

@@ -1,6 +1,5 @@
 package com.github.zshine.auth.service.impl;
 
-import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.github.zshine.auth.constant.Constants;
@@ -12,9 +11,11 @@ import com.github.zshine.common.exception.BusinessException;
 import com.github.zshine.common.valid.AssertUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
+import org.springframework.util.ObjectUtils;
 
 import javax.annotation.Resource;
 import java.nio.charset.StandardCharsets;
+import java.util.Objects;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -22,6 +23,20 @@ public class UserServiceImpl implements UserService {
     @Resource
     private UserDao userDao;
 
+
+    @Override
+    public void login(String username, String password) {
+
+        try {
+            User user = this.getAndCheckNullByUsername(username);
+            if (!Objects.equals(password, DigestUtils.md5DigestAsHex((user.getPassword() + user.getRandom()).getBytes(StandardCharsets.UTF_8)))) {
+                throw new BusinessException("");
+            }
+        } catch (Exception e) {
+            throw new BusinessException("用户名或密码错误");
+        }
+
+    }
 
     @Override
     public Page<User> page(Integer page, Integer limit, Integer status) {
