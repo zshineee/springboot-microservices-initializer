@@ -19,23 +19,17 @@
       </a>
     </div>
     <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
-      <li nz-submenu nzOpen nzTitle="系统设置" nzIcon="setting">
+      <li nz-submenu nzOpen nzTitle="权限管理" nzIcon="user">
         <ul>
           <li nz-menu-item nzMatchRouter>
-            <a routerLink="/route">路由管理</a>
-          </li>
-          <li nz-menu-item nzMatchRouter>
-            <a routerLink="/user">用户管理</a>
-          </li>
-          <li nz-menu-item nzMatchRouter>
-            <a>Workplace</a>
+            <a routerLink="auth/user">用户管理</a>
           </li>
         </ul>
       </li>
-      <li nz-submenu nzOpen nzTitle="Form" nzIcon="form">
+      <li nz-submenu nzOpen nzTitle="系统管理" nzIcon="setting">
         <ul>
           <li nz-menu-item nzMatchRouter>
-            <a>Basic Form</a>
+            <a routerLink="setting/route">路由管理</a>
           </li>
         </ul>
       </li>
