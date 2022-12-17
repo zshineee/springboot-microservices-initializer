@@ -7,6 +7,7 @@ import {NzModalService} from "ng-zorro-antd/modal";
 import {NzMessageService} from "ng-zorro-antd/message";
 import {toNumber} from "ng-zorro-antd/core/util";
 import {UserFormComponent} from "./user-form/user-form.component";
+import {HttpService} from "../common/http/http.service";
 
 export interface User {
   username: string;
@@ -35,7 +36,7 @@ export class UserComponent implements OnInit {
   total = 0;
 
 
-  constructor(private http: HttpClient, private modal: NzModalService, private message: NzMessageService) {
+  constructor(private httpClient: HttpClient, private http: HttpService, private modal: NzModalService, private message: NzMessageService) {
 
   }
 
@@ -44,7 +45,7 @@ export class UserComponent implements OnInit {
   }
 
   query(page: number, limit: number): void {
-    this.http
+    this.httpClient
       .get<PageJsonRsp<User>>(environment.contextPath + "auth/user/page", {
         params: {
           page: page,
@@ -70,7 +71,7 @@ export class UserComponent implements OnInit {
       nzOkType: 'primary',
       nzOkDanger: true,
       nzOnOk: () => {
-        this.http.delete<BaseJsonRsp>(environment.contextPath + "auth/user/delete", {body: {username: username}})
+        this.httpClient.delete<BaseJsonRsp>(environment.contextPath + "auth/user/delete", {body: {username: username}})
           .subscribe((data) => {
             if (data.success) {
               this.query(this.page, this.limit)
@@ -95,7 +96,7 @@ export class UserComponent implements OnInit {
         const user = instance.userForm.value;
         user.status = toNumber(instance.userForm.value.status);
         user.supper = toNumber(instance.userForm.value.supper);
-        this.http.put<BaseJsonRsp>(environment.contextPath + "auth/user/edit", user
+        this.httpClient.put<BaseJsonRsp>(environment.contextPath + "auth/user/edit", user
         )
           .subscribe(() => {
             this.query(this.page, this.limit)
@@ -115,11 +116,10 @@ export class UserComponent implements OnInit {
         const user = instance.userForm.value;
         user.status = toNumber(instance.userForm.value.status);
         user.supper = toNumber(instance.userForm.value.supper);
-        this.http.post<BaseJsonRsp>(environment.contextPath + "auth/user/add", user
-        )
-          .subscribe(() => {
-            this.query(this.page, this.limit)
-          })
+
+        if (this.http.post("auth/user/add", user)) {
+          this.query(this.page, this.limit)
+        }
       },
       nzCancelText: '取消',
     })

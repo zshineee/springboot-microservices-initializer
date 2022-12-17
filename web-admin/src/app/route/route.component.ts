@@ -7,6 +7,7 @@ import {toNumber} from "ng-zorro-antd/core/util";
 import {UntypedFormBuilder, UntypedFormControl, UntypedFormGroup} from "@angular/forms";
 import {PageJsonRsp} from "../common/domain/PageJsonRsp";
 import {BaseJsonRsp} from "../common/domain/BaseJsonRsp";
+import {HttpService} from "../common/http/http.service";
 
 export interface Route {
   id: string;
@@ -37,7 +38,7 @@ export class RouteComponent implements OnInit {
   total = 0;
   validateForm!: UntypedFormGroup;
 
-  constructor(private http: HttpClient, private modal: NzModalService, private fb: UntypedFormBuilder) {
+  constructor(private httpClient: HttpClient, private http: HttpService, private modal: NzModalService, private fb: UntypedFormBuilder) {
   }
 
   ngOnInit(): void {
@@ -57,7 +58,7 @@ export class RouteComponent implements OnInit {
 
   query(page: number, limit: number): void {
     const status = this.validateForm.controls['status'].value;
-    this.http
+    this.httpClient
       .get<PageJsonRsp<Route>>(environment.contextPath + "auth/route/page", {
         params: {
           page: page,
@@ -85,7 +86,7 @@ export class RouteComponent implements OnInit {
       nzOkType: 'primary',
       nzOkDanger: true,
       nzOnOk: () => {
-        this.http.delete<BaseJsonRsp>(environment.contextPath + "auth/route/delete", {body: {id: id}}
+        this.httpClient.delete<BaseJsonRsp>(environment.contextPath + "auth/route/delete", {body: {id: id}}
         )
           .subscribe(() => {
             this.query(this.page, this.limit)
@@ -106,7 +107,7 @@ export class RouteComponent implements OnInit {
       nzOnOk: (instance) => {
         const route = instance.routeForm.value;
         route.status = toNumber(instance.routeForm.value.statusString);
-        this.http.put<BaseJsonRsp>(environment.contextPath + "auth/route/edit", route
+        this.httpClient.put<BaseJsonRsp>(environment.contextPath + "auth/route/edit", route
         )
           .subscribe(() => {
             this.query(this.page, this.limit)
@@ -125,11 +126,11 @@ export class RouteComponent implements OnInit {
       nzOnOk: (instance) => {
         const route = instance.routeForm.value;
         route.status = toNumber(instance.routeForm.value.status);
-        this.http.post<BaseJsonRsp>(environment.contextPath + "auth/route/add", route
-        )
-          .subscribe(() => {
-            this.query(this.page, this.limit)
-          })
+
+        if (this.http.post("auth/route/add", route)) {
+          this.query(this.page, this.limit)
+        }
+
       },
       nzCancelText: '取消',
     })
