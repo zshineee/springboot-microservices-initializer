@@ -7,6 +7,7 @@ import {HttpClientModule} from "@angular/common/http";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {LoginModule} from "./login/login.module";
 import {LayoutModule} from "./layout/layout.module";
+import {NzMessageModule} from "ng-zorro-antd/message";
 @NgModule({
   declarations: [
     AppComponent
@@ -17,7 +18,8 @@ import {LayoutModule} from "./layout/layout.module";
     HttpClientModule,
     BrowserAnimationsModule,
     LoginModule,
-    LayoutModule
+    LayoutModule,
+    NzMessageModule
   ],
   providers: [
   ],

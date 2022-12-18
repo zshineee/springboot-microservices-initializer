@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {UntypedFormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
+import {HttpService} from "../common/http/http.service";
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,14 @@ export class LoginComponent implements OnInit {
   validateForm!: UntypedFormGroup;
 
   submitForm(): void {
-    this.router.navigateByUrl('/layout');
+
+    const username = this.validateForm.controls['userName'].value;
+    const password = this.validateForm.controls['password'].value;
+
+    if (this.http.post("auth/login", {username: username, password: password})) {
+      this.router.navigateByUrl('/layout').then();
+    }
+
 
     // if (this.validateForm.valid) {
     //   console.log('submit', this.validateForm.value);
@@ -25,7 +33,7 @@ export class LoginComponent implements OnInit {
     // }
   }
 
-  constructor(private fb: UntypedFormBuilder, private router: Router) {
+  constructor(private fb: UntypedFormBuilder, private router: Router, private http: HttpService) {
   }
 
   ngOnInit(): void {
