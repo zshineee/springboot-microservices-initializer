@@ -1,5 +1,6 @@
 package com.github.zshine.auth.service.impl;
 
+import cn.dev33.satoken.stp.StpUtil;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.github.zshine.auth.constant.Constants;
@@ -32,6 +33,7 @@ public class UserServiceImpl implements UserService {
             if (!Objects.equals(password, DigestUtils.md5DigestAsHex((user.getPassword() + user.getRandom()).getBytes(StandardCharsets.UTF_8)))) {
                 throw new BusinessException("");
             }
+            StpUtil.login(username);
         } catch (Exception e) {
             throw new BusinessException("用户名或密码错误");
         }

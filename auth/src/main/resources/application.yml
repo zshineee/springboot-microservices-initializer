@@ -32,3 +32,15 @@ spring:
           destination: route-topic
         route-out-0:
           destination: route-topic
+sa-token:
+  token-name: micro
+  # 3天
+  timeout: 259200
+  # token临时有效期 (指定时间内无操作就视为token过期) 单位: 秒
+  activity-timeout: -1
+  # 是否允许同一账号并发登录
+  is-concurrent: false
+  # token风格
+  token-style: uuid
+  # 是否输出操作日志
+  is-log: false

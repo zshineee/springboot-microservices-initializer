@@ -26,6 +26,7 @@
         <lombok.version>1.18.24</lombok.version>
         <mybatis-plus.version>3.5.2</mybatis-plus.version>
         <mysql.version>8.0.28</mysql.version>
+        <sa.token.version>1.33.0</sa.token.version>
     </properties>
 
     <parent>
@@ -86,6 +87,13 @@
                 <artifactId>mysql-connector-java</artifactId>
                 <version>${mysql.version}</version>
             </dependency>
+            <!-- Sa-Token -->
+            <dependency>
+                <groupId>cn.dev33</groupId>
+                <artifactId>sa-token-spring-boot-starter</artifactId>
+                <version>${sa.token.version}</version>
+            </dependency>
+
             <!-- springCloud -->
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
