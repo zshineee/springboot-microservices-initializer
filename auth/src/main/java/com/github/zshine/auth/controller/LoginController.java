@@ -14,7 +14,7 @@ import javax.validation.Valid;
 @Api(tags = "登录")
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
-@RequestMapping(value = "/login")
+@RequestMapping(value = "/")
 @Validated
 public class LoginController {
 

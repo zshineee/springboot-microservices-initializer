@@ -26,4 +26,4 @@ CREATE TABLE user
     remark     VARCHAR(512) COMMENT '说明'
 ) COMMENT '用户表';
 INSERT INTO user(username, password, supper, status, fullname, random, remark)
-values ('admin', '3f79ae3478c0ea3d60c355e9bdfe5020', 1, 1, '管理员', '715d886a-113b-43f2-b05a-aa9c00a10624', null)
+values ('admin', '982050fab9a36cb3fc3882ee9d306d11', 1, 1, '管理员', '715d886a-113b-43f2-b05a-aa9c00a10624', null)

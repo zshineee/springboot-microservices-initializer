@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserService {
 
         try {
             User user = this.getAndCheckNullByUsername(username);
-            if (!Objects.equals(password, DigestUtils.md5DigestAsHex((user.getPassword() + user.getRandom()).getBytes(StandardCharsets.UTF_8)))) {
+            if (!Objects.equals(user.getPassword(), DigestUtils.md5DigestAsHex((password + user.getRandom()).getBytes(StandardCharsets.UTF_8)))) {
                 throw new BusinessException("");
             }
             StpUtil.login(username);

@@ -53,6 +53,7 @@ public class DynamicRouteHandler implements RouteDefinitionRepository, Applicati
             //通知刷新网关
             routeDefinitions = temps;
             applicationEventPublisher.publishEvent(new RefreshRoutesEvent(this));
+            log.info("加载路由成功");
         }
     }
 
