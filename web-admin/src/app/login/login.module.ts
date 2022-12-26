@@ -8,6 +8,8 @@ import {NzInputModule} from "ng-zorro-antd/input";
 import {NzButtonModule} from "ng-zorro-antd/button";
 import {ReactiveFormsModule} from "@angular/forms";
 import {NzCheckboxModule} from "ng-zorro-antd/checkbox";
+import {NzIconModule} from "ng-zorro-antd/icon";
+import {NzTabsModule} from "ng-zorro-antd/tabs";
 
 
 @NgModule({
@@ -24,7 +26,9 @@ import {NzCheckboxModule} from "ng-zorro-antd/checkbox";
     NzInputModule,
     NzButtonModule,
     ReactiveFormsModule,
-    NzCheckboxModule
+    NzCheckboxModule,
+    NzIconModule,
+    NzTabsModule
   ]
 })
 export class LoginModule { }

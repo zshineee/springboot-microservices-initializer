@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit {
 
   submitForm(): void {
 
-    const username = this.validateForm.controls['userName'].value;
+    const username = this.validateForm.controls['username'].value;
     const password = this.validateForm.controls['password'].value;
 
     if (this.http.post("auth/login", {username: username, password: password})) {
@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.validateForm = this.fb.group({
-      userName: [null, [Validators.required]],
+      username: [null, [Validators.required]],
       password: [null, [Validators.required]],
       remember: [true]
     });
