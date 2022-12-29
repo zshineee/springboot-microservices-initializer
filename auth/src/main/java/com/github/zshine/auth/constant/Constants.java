@@ -7,4 +7,10 @@ public class Constants {
 
 
     public static final String EXIST_ERROR_MESSAGE = "数据已存在";
+
+
+    /**
+     * 根节点
+     */
+    public static final String ROOT_NODE = "/";
 }

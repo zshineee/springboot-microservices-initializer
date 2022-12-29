@@ -26,4 +26,15 @@ CREATE TABLE user
     remark     VARCHAR(512) COMMENT '说明'
 ) COMMENT '用户表';
 INSERT INTO user(username, password, supper, status, fullname, random, remark)
-values ('admin', '982050fab9a36cb3fc3882ee9d306d11', 1, 1, '管理员', '715d886a-113b-43f2-b05a-aa9c00a10624', null)
+values ('admin', '982050fab9a36cb3fc3882ee9d306d11', 1, 1, '管理员', '715d886a-113b-43f2-b05a-aa9c00a10624', null);
+
+-- 资源表
+DROP TABLE IF EXISTS resource;
+CREATE TABLE resource
+(
+    id        VARCHAR(32) PRIMARY KEY comment 'id',
+    parent_id VARCHAR(32)  NOT NULL COMMENT '父节点',
+    `name`    VARCHAR(32)  NOT NULL COMMENT '名称',
+    url       VARCHAR(255) NOT NULL COMMENT 'url',
+    priority  int(4) DEFAULT 0 comment '优先级'
+) comment '资源表';
