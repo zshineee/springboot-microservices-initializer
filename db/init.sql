@@ -38,3 +38,28 @@ CREATE TABLE resource
     url       VARCHAR(255) NOT NULL COMMENT 'url',
     priority  int(4) DEFAULT 0 comment '优先级'
 ) comment '资源表';
+
+-- 角色表
+DROP TABLE IF EXISTS role;
+CREATE TABLE role
+(
+    id       int(4) PRIMARY KEY AUTO_INCREMENT comment 'id',
+    `name`   VARCHAR(32) NOT NULL COMMENT '名称',
+    `status` TINYINT DEFAULT 0 COMMENT '状态：1-有效，0-无效'
+) comment '角色表';
+-- 角色与资源关联表
+DROP TABLE IF EXISTS role_join_resource;
+CREATE TABLE role_join_resource
+(
+    role_id     int(4)      NOT NULL comment '角色ID',
+    resource_id VARCHAR(32) NOT NULL COMMENT '资源ID',
+    PRIMARY KEY (role_id, resource_id)
+) comment '角色与资源关联表';
+-- 用户与角色关联表
+DROP TABLE IF EXISTS user_join_role;
+CREATE TABLE user_join_role
+(
+    username VARCHAR(32) COMMENT '用户名',
+    role_id  int(4) NOT NULL comment '角色ID',
+    PRIMARY KEY (username, role_id)
+) comment '用户与角色关联表';
