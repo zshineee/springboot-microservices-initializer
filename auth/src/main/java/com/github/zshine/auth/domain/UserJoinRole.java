@@ -10,4 +10,12 @@ public class UserJoinRole {
     private String username;
 
     private Integer roleId;
+
+
+    public static UserJoinRole getInstance(String username, Integer roleId) {
+        UserJoinRole userJoinRole = new UserJoinRole();
+        userJoinRole.setRoleId(roleId);
+        userJoinRole.setUsername(username);
+        return userJoinRole;
+    }
 }

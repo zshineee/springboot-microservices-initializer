@@ -3,9 +3,12 @@ package com.github.zshine.auth.controller.dto;
 import com.github.zshine.auth.constant.enums.StatusEnum;
 import com.github.zshine.auth.domain.User;
 import com.github.zshine.common.valid.CustomValidator;
+import com.github.zshine.common.valid.PatternEnum;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
+import java.util.List;
 
 @Data
 public class UserDTO {
@@ -23,7 +26,7 @@ public class UserDTO {
 
     @Data
     @EqualsAndHashCode(callSuper = false)
-    public static class Edit extends Id {
+    public static class Edit extends Delete {
 
         @ApiModelProperty(notes = "是否启用")
         @CustomValidator(name = "是否启用", notnull = true, enumClass = StatusEnum.class)
@@ -37,14 +40,18 @@ public class UserDTO {
         @CustomValidator(name = "说明", max = 512)
         protected String remark;
 
+        @ApiModelProperty(notes = "角色ID")
+        @CustomValidator(name = "角色ID", max = 4, pattern = PatternEnum.NATURE)
+        protected List<Integer> roleIds;
+
         public User convert() {
-            return User.getInstance(username, null, StatusEnum.getInstance(status), fullname, remark);
+            return User.getInstance(username, null, StatusEnum.getInstance(status), fullname, remark, roleIds);
         }
 
     }
 
     @Data
-    public static class Id {
+    public static class Delete {
 
         @ApiModelProperty(notes = "用户名")
         @CustomValidator(name = "用户名", max = 32, notnull = true)

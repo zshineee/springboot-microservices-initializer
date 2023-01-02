@@ -14,7 +14,7 @@ public interface UserService {
     void login(String username, String password);
 
     /**
-     * 分页查询
+     * 分页查询用户信息（同时查询用户对应的角色）
      *
      * @param page   页码
      * @param limit  查询条数
@@ -25,21 +25,21 @@ public interface UserService {
 
 
     /**
-     * 根据ID删除（并校验是否为空，空值抛出异常，刷新网关）
+     * 根据ID删除用户信息（同时删除相关角色，校验用户是否为空，空值抛出异常，不能删除超户）
      *
      * @param username 主键
      */
     void delete(String username);
 
     /**
-     * 新增
+     * 新增用户信息（同时新增相关角色，校验用户是否为空，不为空抛出异常）
      *
      * @param user POJO
      */
     void add(User user);
 
     /**
-     * 修改
+     * 修改用户信息（同时删除并新增相关角色，校验用户是否为空，空值抛出异常）
      *
      * @param user POJO
      */

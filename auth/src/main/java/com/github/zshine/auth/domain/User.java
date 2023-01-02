@@ -9,6 +9,8 @@ import com.github.zshine.auth.controller.vo.UserVO;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 @Data
@@ -40,8 +42,12 @@ public class User {
     @ApiModelProperty(notes = "说明")
     private String remark;
 
+    @ApiModelProperty(notes = "角色")
+    @TableField(exist = false)
+    private List<Integer> roleIds;
 
-    public static User getInstance(String username, String password, StatusEnum status, String fullname, String remark) {
+
+    public static User getInstance(String username, String password, StatusEnum status, String fullname, String remark, List<Integer> roleIds) {
         User user = new User();
         user.setUsername(username);
         user.setPassword(password);
@@ -50,11 +56,12 @@ public class User {
         user.setRemark(remark);
         user.setSupper(StatusEnum.FAIL);
         user.setRandom(UUID.randomUUID().toString());
+        user.setRoleIds(roleIds);
         return user;
     }
 
-    public UserVO convert() {
-        return UserVO.getInstance(username, supper, status, fullname, remark);
+    public UserVO convert(Map<Integer, String> roleIdRoleNameMap) {
+        return UserVO.getInstance(username, supper, status, fullname, remark, roleIds, roleIdRoleNameMap);
     }
 
 }
