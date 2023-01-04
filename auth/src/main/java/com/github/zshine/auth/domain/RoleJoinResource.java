@@ -14,4 +14,11 @@ public class RoleJoinResource {
     @ApiModelProperty(notes = "资源ID")
     private String resourceId;
 
+
+    public static RoleJoinResource getInstance(Integer roleId, String resourceId) {
+        RoleJoinResource roleJoinResource = new RoleJoinResource();
+        roleJoinResource.setRoleId(roleId);
+        roleJoinResource.setResourceId(resourceId);
+        return roleJoinResource;
+    }
 }

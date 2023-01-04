@@ -20,4 +20,11 @@ public class Role {
     @ApiModelProperty(notes = "是否启用")
     private StatusEnum status;
 
+
+    public static Role getInstance(String name, Integer status) {
+        Role role = new Role();
+        role.setName(name);
+        role.setStatus(StatusEnum.getInstance(status));
+        return role;
+    }
 }
