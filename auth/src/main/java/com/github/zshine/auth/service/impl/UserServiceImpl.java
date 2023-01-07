@@ -37,10 +37,15 @@ public class UserServiceImpl implements UserService {
 
         try {
             User user = this.getAndCheckNullByUsername(username);
+            if (user.getStatus().equals(StatusEnum.FAIL)) {
+                throw new BusinessException("账户不可用");
+            }
             if (!Objects.equals(user.getPassword(), DigestUtils.md5DigestAsHex((password + user.getRandom()).getBytes(StandardCharsets.UTF_8)))) {
                 throw new BusinessException("");
             }
             StpUtil.login(username);
+        } catch (BusinessException be) {
+            throw new BusinessException(be.getMessage());
         } catch (Exception e) {
             throw new BusinessException("用户名或密码错误");
         }
@@ -93,12 +98,18 @@ public class UserServiceImpl implements UserService {
         this.addRoleIds(user.getUsername(), user.getRoleIds());
     }
 
+    /**
+     * 查询并校验用户是否为空，为空则抛出异常
+     */
     private User getAndCheckNullByUsername(String username) {
         User user = userDao.getById(username);
         AssertUtil.notNull(user, Constants.NULL_ERROR_MESSAGE);
         return user;
     }
 
+    /**
+     * 查校验用户是否存在，不存在则抛出异常
+     */
     private void checkExistByUsername(String username) {
         AssertUtil.mustNull(userDao.getById(username), Constants.EXIST_ERROR_MESSAGE);
     }
@@ -134,4 +145,6 @@ public class UserServiceImpl implements UserService {
             userJoinRoleDao.saveBatch(roleIds.stream().map(roleId -> UserJoinRole.getInstance(username, roleId)).collect(Collectors.toList()));
         }
     }
+
+
 }
