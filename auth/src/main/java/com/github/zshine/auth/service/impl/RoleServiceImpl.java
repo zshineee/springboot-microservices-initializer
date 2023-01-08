@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -40,6 +41,28 @@ public class RoleServiceImpl implements RoleService {
         return roleDao.list()
                 .stream()
                 .collect(Collectors.toMap(Role::getId, Role::getName));
+    }
+
+    @Override
+    public List<Integer> listValid() {
+        return roleDao.list(Wrappers.<Role>lambdaQuery()
+                        .eq(Role::getStatus, StatusEnum.EFFECT.getCode()))
+                .stream()
+                .map(Role::getId)
+                .toList();
+    }
+
+    @Override
+    public List<String> listResourceIdsByRoleIds(List<Integer> roleIds) {
+        if (roleIds.isEmpty()) {
+            return new ArrayList<>();
+        }
+        return roleJoinResourceDao.list(Wrappers.<RoleJoinResource>lambdaQuery()
+                        .in(RoleJoinResource::getRoleId, roleIds))
+                .stream()
+                .map(RoleJoinResource::getResourceId)
+                .collect(Collectors.toSet())
+                .stream().toList();
     }
 
     @Override

@@ -3,6 +3,8 @@ package com.github.zshine.auth.service;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.github.zshine.auth.domain.User;
 
+import java.util.List;
+
 public interface UserService {
 
     /**
@@ -45,4 +47,11 @@ public interface UserService {
      */
     void edit(User user);
 
+    /**
+     * 查询用户菜单资源权限
+     *
+     * @param username 用户名
+     * @return 资源ID的集合
+     */
+    List<String> getResourceIdByUsername(String username);
 }

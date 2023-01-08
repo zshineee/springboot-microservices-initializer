@@ -9,6 +9,7 @@ import com.github.zshine.auth.dao.UserDao;
 import com.github.zshine.auth.dao.UserJoinRoleDao;
 import com.github.zshine.auth.domain.User;
 import com.github.zshine.auth.domain.UserJoinRole;
+import com.github.zshine.auth.service.RoleService;
 import com.github.zshine.auth.service.UserService;
 import com.github.zshine.common.exception.BusinessException;
 import com.github.zshine.common.valid.AssertUtil;
@@ -30,6 +31,9 @@ public class UserServiceImpl implements UserService {
 
     @Resource
     private UserJoinRoleDao userJoinRoleDao;
+
+    @Resource
+    private RoleService roleService;
 
 
     @Override
@@ -144,6 +148,23 @@ public class UserServiceImpl implements UserService {
         if (!ObjectUtils.isEmpty(roleIds)) {
             userJoinRoleDao.saveBatch(roleIds.stream().map(roleId -> UserJoinRole.getInstance(username, roleId)).collect(Collectors.toList()));
         }
+    }
+
+    @Override
+    public List<String> getResourceIdByUsername(String username) {
+
+        List<Integer> currentValidRoleIds = roleService.listValid();
+
+        List<Integer> roleIds = userJoinRoleDao.list(Wrappers.<UserJoinRole>lambdaQuery()
+                        .eq(UserJoinRole::getUsername, username))
+                .stream()
+                .map(UserJoinRole::getRoleId)
+                .filter(currentValidRoleIds::contains)
+                .toList();
+        if (roleIds.isEmpty()) {
+            return new ArrayList<>();
+        }
+        return roleService.listResourceIdsByRoleIds(roleIds);
     }
 
 

@@ -28,6 +28,23 @@ public interface RoleService {
 
 
     /**
+     * 查询当前启用(有效)的角色ID
+     *
+     * @return 角色ID
+     */
+    List<Integer> listValid();
+
+
+    /**
+     * 根据角色ID查询关联的资源ID
+     *
+     * @param roleIds 角色ID
+     * @return 资源ID
+     */
+    List<String> listResourceIdsByRoleIds(List<Integer> roleIds);
+
+
+    /**
      * 删除角色及关联的资源
      *
      * @param id 角色ID
