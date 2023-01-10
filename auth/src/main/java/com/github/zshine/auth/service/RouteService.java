@@ -19,7 +19,6 @@ public interface RouteService {
     Page<Route> page(Integer page, Integer limit, Integer status);
 
 
-
     /**
      * 根据ID删除（并校验是否为空，空值抛出异常，刷新网关）
      *
@@ -48,4 +47,9 @@ public interface RouteService {
      * @return list
      */
     List<String> listRoutesString();
+
+    /**
+     * 刷新网关
+     */
+    void refresh();
 }

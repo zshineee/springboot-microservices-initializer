@@ -92,7 +92,8 @@ public class RouteServiceImpl implements RouteService {
     /**
      * 刷新网关
      */
-    private void refresh() {
+    @Override
+    public void refresh() {
         log.info("刷新网关数据");
 
         List<String> routes = this.listRoutesString();
